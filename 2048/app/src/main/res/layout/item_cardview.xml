@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/brown">
+
+        <TextView
+            android:id="@+id/textScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Score:"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/score_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/textScore"
+            android:text="500"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:layout_toRightOf="@+id/textScore" />
+
+        <TextView
+            android:id="@+id/textPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/score_cardview"
+            android:text="Username:"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/player_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/score_cardview"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/textPlayer"
+            android:text="500"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:layout_toRightOf="@+id/textPlayer" />
+
+        <!--     <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textPlayer"
+                android:text="Date:"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+           <TextView
+                android:id="@+id/dateRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textDate"
+                android:layout_below="@+id/textPlayer"
+                android:text="500"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/textDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textDate"
+                android:text="Duration:"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/durationRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textDuration"
+                android:layout_below="@+id/textDate"
+                android:text="500"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                android:id="@+id/imageEdit"
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                android:layout_toStartOf="@+id/imageDelete"
+                android:layout_marginRight="10dp"/>
+                android:src="@drawable/edit"
+
+        <ImageView
+            android:id="@+id/imageDelete"
+            android:layout_width="25dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"/>
+            <!-android:src="@drawable/remove" -->
+
+
+    </RelativeLayout>
+
+</LinearLayout>

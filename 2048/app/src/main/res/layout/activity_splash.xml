@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".SplashActivity">
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/general_margin"
+        android:gravity="center"
+        android:text="@string/android_game"
+        android:textColor="@color/brownGrid"
+        android:textSize="@dimen/splash_title_size" />
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/general_margin"
+        android:gravity="center"
+        android:stretchColumns="*">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/_2"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/splash_text_size" />
+
+            <TextView
+                android:id="@+id/cero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/_0"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/splash_text_size" />
+
+            <TextView
+                android:id="@+id/four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/_4"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/splash_text_size" />
+
+            <TextView
+                android:id="@+id/eight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/_8"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/splash_text_size" />
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/img_height"
+        android:layout_margin="@dimen/general_margin"
+        android:src="@drawable/logocifp" />
+
+    <TextView
+        android:id="@+id/TextViewBottomVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/text_footer"
+        android:textColor="@color/brownGrid"
+        android:textSize="@dimen/footer_text_size"/>
+
+</LinearLayout>

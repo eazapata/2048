@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">2048</string>
+    <string name="_2">2</string>
+    <string name="_0">0</string>
+    <string name="_4">4</string>
+    <string name="_8">8</string>
+    <string name="android_game">Android Game</string>
+    <string name="text_footer">Version 2.0.0\nCopyright © 2011 Mamlambo\nAllRights Reserved</string>
+    <string name="score">Score</string>
+    <string name="max_score">Max Score</string>
+    <string name="player_name">Player name:</string>
+    <string name="new_game">New game</string>
+    <string name="undo">Undo</string>
+    <string name="save">Save</string>
+    <string name="show">Show</string>
+    <string name="player_name_hint">Player name</string>
+</resources>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="2"
+    android:background="@color/background"
+    tools:context=".MainActivity">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:layout_above="@+id/grid">
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:text="@string/score" />
+
+        <TextView
+            android:id="@+id/max_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:text="@string/max_score" />
+
+        <TextView
+            android:id="@+id/score_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/splash_title_size" />
+
+        <TextView
+            android:id="@+id/max_score_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="@dimen/splash_title_size" />
+        <TextView
+            android:id="@+id/player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/splash_title_size"
+            android:text="@string/player_name"/>
+        <TextView
+            android:id="@+id/player_name_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/splash_title_size"
+            android:text="@string/player_name"/>
+    </GridLayout>
+    <GridLayout
+        android:id="@+id/grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        android:background="@color/brownGrid"
+        android:columnCount="4"
+        android:rowCount="4">
+
+        <ImageView
+            android:id="@+id/one"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/two"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/three"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/four"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/five"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/six"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/seven"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/eight"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/nine"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ten"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/eleven"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/twelve"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/thirteen"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/fourteen"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/fifteen"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/sixteen"
+            android:layout_width="@dimen/fieldSize"
+            android:layout_height="@dimen/fieldSize"
+            android:layout_gravity="fill"
+            android:layout_margin="@dimen/marginFields"
+            android:background="@color/brown"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </GridLayout>
+
+    <Button
+        android:id="@+id/new_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grid"
+        android:layout_marginBottom="52dp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/new_game"
+        android:backgroundTint="@color/brown"
+        android:layout_marginStart="52dp" />
+    <Button
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grid"
+        android:layout_toRightOf="@+id/new_game"
+        android:layout_marginBottom="52dp"
+        android:layout_marginLeft="52dp"
+        android:text="@string/undo"
+        android:backgroundTint="@color/brown"/>
+</RelativeLayout>
