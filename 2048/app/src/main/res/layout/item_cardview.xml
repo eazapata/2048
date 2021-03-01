@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="0dp"
-    android:layout_marginBottom="20dp">
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="#fed5b9"
+    app:cardUseCompatPadding="true"
+    tools:ignore="MissingClass">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="@color/brown">
+        android:background="#fed5b9">
 
         <TextView
             android:id="@+id/textScore"
@@ -55,55 +60,56 @@
             android:textSize="15dp"
             android:layout_toRightOf="@+id/textPlayer" />
 
-        <!--     <TextView
-                android:id="@+id/textDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textPlayer"
-                android:text="Date:"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPlayer"
+            android:text="Country:"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
-           <TextView
-                android:id="@+id/dateRecycler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/textDate"
-                android:layout_below="@+id/textPlayer"
-                android:text="500"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"
-                android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/country_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/textCountry"
+            android:layout_below="@+id/textPlayer"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/textCountry" />
 
-            <TextView
-                android:id="@+id/textDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textDate"
-                android:text="Duration:"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/country_cardview"
+            android:text="Duration:"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/durationRecycler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/textDuration"
-                android:layout_below="@+id/textDate"
-                android:text="500"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"
-                android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/duration_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/textDuration"
+            android:layout_below="@id/country_cardview"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/textDuration" />
 
-            <ImageView
-                android:id="@+id/imageEdit"
-                android:layout_width="25dp"
-                android:layout_height="50dp"
-                android:layout_toStartOf="@+id/imageDelete"
-                android:layout_marginRight="10dp"/>
-                android:src="@drawable/edit"
+        <ImageView
+            android:id="@+id/imageEdit"
+            android:layout_width="25dp"
+            android:layout_height="50dp"
+            android:layout_toStartOf="@id/imageDelete"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imageDelete"
+            android:src="@drawable/ic_baseline_edit_24" />
 
         <ImageView
             android:id="@+id/imageDelete"
@@ -111,10 +117,11 @@
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"/>
-            <!-android:src="@drawable/remove" -->
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_baseline_delete_24"/>
 
 
     </RelativeLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

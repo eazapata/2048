@@ -150,15 +150,22 @@ public class Game {
         return score;
     }
 
-    public boolean checkEndgame(int[][] values) {
+    public boolean checkGrid(int[][] values){
         boolean endGame = true;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
                 if (values[i][j] == 0) {
                     endGame = false;
+                    break;
                 }
             }
         }
+        return endGame;
+    }
+
+    public boolean checkEndgame(int[][] values) {
+        boolean endGame = true;
+
         if (endGame) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {

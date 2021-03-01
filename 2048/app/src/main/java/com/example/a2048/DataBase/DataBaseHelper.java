@@ -49,11 +49,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         ContentValues values = new ContentValues();
         values.put(PLAYER_NAME,score.getPlayer());
-        values.put(SCORE,score.getPlayerScore());
         values.put(COUNTRY,score.getCountry());
+        values.put(SCORE,score.getPlayerScore());
         mWritableDB.insert(TABLE,null,values);
 
     }
+
+    public int delete(int id) {
+        int deleted = 0;
+        try {
+            if (mWritableDB == null) {
+                mWritableDB = getWritableDatabase();
+            }
+            deleted = mWritableDB.delete(TABLE,
+                    KEY_ID + " = ? ", new String[]{String.valueOf(id)});
+        } catch (Exception e) {
+            Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
+        }
+        return deleted;
+    }
+
 
     public List<Score> getAllScores(){
         List<Score> getAllScores = new ArrayList<>();
@@ -64,7 +79,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 int scoreId = cursor.getInt(0);
                 String username = cursor.getString(1);
-                Integer score = cursor.getInt(2);
+                String country = cursor.getString(2);
+                Integer score = cursor.getInt(3);
                 Score newScore = new Score(scoreId, username, score, "asd");
                 getAllScores.add(newScore);
             }
@@ -78,20 +94,55 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return getAllScores;
     }
 
-    public int updateScore(int id, String playerName, String country) {
-        int mNumberOfRowsUpdated = -1;
-        try {
-            if (mWritableDB == null) {
-                mWritableDB = getWritableDatabase();
-            }
-            ContentValues values = new ContentValues();
-            values.put(PLAYER_NAME, playerName);
-            mNumberOfRowsUpdated = mWritableDB.update(TABLE, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
-
-        } catch (Exception e) {
-            Log.d(TAG, "UPDATE EXCEPTION: " + e.getMessage());
+    public List<Score> getScoresBy(String order){
+        String getScoresBy = null;
+        List<Score> getScoresByParam = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        switch (order){
+            case "Score":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + SCORE +" asc";
+                break;
+            case "ByScoreDesc":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + SCORE +" desc";
+                break;
+            case "ByUsername":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + PLAYER_NAME +" desc";
+                break;
+            case "ByUsernameDesc":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + PLAYER_NAME;
+                break;
+            case "ByCountry":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + COUNTRY +" desc";
+                break;
+            case "ByCountryDesc":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + COUNTRY;
+                break;
+            case "ByDuration":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + "GAME_DURATION_TABLE" +" desc";
+                break;
+            case "ByDurationDesc":
+                getScoresBy = "SELECT * FROM " + TABLE + " order by " + "GAME_DURATION_TABLE";
+                break;
         }
-        return mNumberOfRowsUpdated;
+        Cursor cursor = db.rawQuery(getScoresBy, null);
+        if (cursor.moveToNext()) {
+            do {
+                int scoreId = cursor.getInt(0);
+                String username = cursor.getString(1);
+                String country = cursor.getString(2);
+                Integer score = cursor.getInt(3);
+                Score newScore = new Score(scoreId, username, score, "asd");
+                getScoresByParam.add(newScore);
+            }
+            while (cursor.moveToNext());
+        }
+        else{
+            //There aren't scores. No scores will be displayed
+        }
+        cursor.close();
+        db.close();
+        return getScoresByParam;
     }
+
 }
 

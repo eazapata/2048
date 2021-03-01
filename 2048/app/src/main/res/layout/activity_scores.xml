@@ -4,7 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataBase.ScoresActivity">
+    tools:context=".DataBase.ScoresActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/score_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score"/>
+        <Button
+            android:id="@+id/name_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player"/>
+        <Button
+            android:id="@+id/time_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"/>
+        <Button
+            android:id="@+id/country_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_score"

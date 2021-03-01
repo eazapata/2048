@@ -1,6 +1,5 @@
 package com.example.a2048;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -157,32 +156,44 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void setRandomNumber() {
-        if (game.checkEndgame(this.textViewValues)) {
+        boolean play = game.checkEndgame(this.textViewValues);
+        if (play) {
             Score score = new Score();
             score.setPlayer(player);
             score.setPlayerScore(this.actualScore);
             dataBaseHelper.insertScore(score);
             finish();
         } else {
-            Random random = new Random();
-            int pos1 = random.nextInt(4);
-            int pos2 = random.nextInt(4);
-            int[] numbers = {2, 4};
-            int value = numbers[random.nextInt(2)];
-            while (this.textViewValues[pos1][pos2] != 0) {
-                pos1 = random.nextInt(4);
-                pos2 = random.nextInt(4);
+            boolean freeSpace = false;
+            for (int x = 0; x < 4; x++) {
+                for (int y = 0; y < 4; y++) {
+                    if (textViewValues[x][y] == 0) {
+                        freeSpace = true;
+                    }
+                }
+            }
+            if (freeSpace) {
+                Random random = new Random();
+                int pos1 = random.nextInt(4);
+                int pos2 = random.nextInt(4);
+                int[] numbers = {2, 4};
+                int value = numbers[random.nextInt(2)];
+                while (this.textViewValues[pos1][pos2] != 0) {
+                    pos1 = random.nextInt(4);
+                    pos2 = random.nextInt(4);
+
+                }
+                if (value == 2) {
+                    this.imageViews[pos1][pos2].setImageResource(R.drawable.two_img);
+                } else {
+                    this.imageViews[pos1][pos2].setImageResource(R.drawable.four);
+                }
+                this.textViewValues[pos1][pos2] = value;
 
             }
-            if (value == 2) {
-                this.imageViews[pos1][pos2].setImageResource(R.drawable.two_img);
-            } else {
-                this.imageViews[pos1][pos2].setImageResource(R.drawable.four);
-            }
-            this.textViewValues[pos1][pos2] = value;
-
         }
     }
+
 
     private void undoMovement() {
         resetImages();
