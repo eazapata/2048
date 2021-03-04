@@ -4,9 +4,30 @@ import android.widget.ImageView;
 
 import com.example.a2048.R;
 
+
+
 public class Game {
+    private boolean movementSuccessful;
+    private boolean firstMovement;
+
+    public boolean isFirstMovement() {
+        return firstMovement;
+    }
+
+    public void setFirstMovement(boolean firstMovement) {
+        this.firstMovement = firstMovement;
+    }
+
+    public boolean isMovementSuccessful() {
+        return movementSuccessful;
+    }
+
+    public void setMovementSuccessful(boolean movementSuccessful) {
+        this.movementSuccessful = movementSuccessful;
+    }
 
     public int up(ImageView[][] imageViews, int[][] textViewValues, int score) {
+        this.movementSuccessful = false;
         for (int i = 1; i < textViewValues.length; i++) {
             for (int j = 0; j < textViewValues[i].length; j++) {
                 imageViews[i][j].setImageDrawable(null);
@@ -14,6 +35,7 @@ public class Game {
                     if (textViewValues[k][j] != 0 && textViewValues[k - 1][j] == 0) {
                         textViewValues[k - 1][j] = textViewValues[k][j];
                         textViewValues[k][j] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -24,6 +46,8 @@ public class Game {
                     textViewValues[i - 1][j] += textViewValues[i][j];
                     score +=   textViewValues[i - 1][j];
                     textViewValues[i][j] = 0;
+                    this.movementSuccessful = true;
+                    this.firstMovement = false;
                 }
             }
         }
@@ -32,8 +56,8 @@ public class Game {
                 for (int k = i; k > 0; k--) {
                     if (textViewValues[k][j] != 0 && textViewValues[k - 1][j] == 0) {
                         textViewValues[k - 1][j] = textViewValues[k][j];
-                        System.out.println("try");
                         textViewValues[k][j] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -43,6 +67,7 @@ public class Game {
     }
 
     public int down(ImageView[][] imageViews, int[][] textViewValues, int score) {
+        this.movementSuccessful = false;
         for (int i = textViewValues.length - 2; i >= 0; i--) {
             for (int j = 0; j < textViewValues[i].length; j++) {
                 imageViews[i][j].setImageDrawable(null);
@@ -50,6 +75,7 @@ public class Game {
                     if (textViewValues[k][j] != 0 && textViewValues[k + 1][j] == 0) {
                         textViewValues[k + 1][j] = textViewValues[k][j];
                         textViewValues[k][j] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -60,6 +86,8 @@ public class Game {
                     textViewValues[i + 1][j] += textViewValues[i][j];
                     score += textViewValues[i + 1][j];
                     textViewValues[i][j] = 0;
+                    this.movementSuccessful = true;
+                    this.firstMovement = false;
                 }
             }
 
@@ -70,6 +98,7 @@ public class Game {
                     if (textViewValues[k][j] != 0 && textViewValues[k + 1][j] == 0) {
                         textViewValues[k + 1][j] = textViewValues[k][j];
                         textViewValues[k][j] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -79,6 +108,7 @@ public class Game {
     }
 
     public int left(ImageView[][] imageViews, int[][] textViewValues, int score) {
+        this.movementSuccessful = false;
         for (int i = 0; i < textViewValues.length; i++) {
             for (int j = 1; j < textViewValues[i].length; j++) {
                 imageViews[i][j].setImageDrawable(null);
@@ -86,6 +116,7 @@ public class Game {
                     if (textViewValues[i][k] != 0 && textViewValues[i][k - 1] == 0) {
                         textViewValues[i][k - 1] = textViewValues[i][k];
                         textViewValues[i][k] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -96,6 +127,8 @@ public class Game {
                     textViewValues[i][j - 1] += textViewValues[i][j];
                     score +=textViewValues[i][j - 1];
                     textViewValues[i][j] = 0;
+                    this.movementSuccessful = true;
+                    this.firstMovement = false;
                 }
             }
         }
@@ -105,6 +138,7 @@ public class Game {
                     if (textViewValues[i][k] != 0 && textViewValues[i][k - 1] == 0) {
                         textViewValues[i][k - 1] = textViewValues[i][k];
                         textViewValues[i][k] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -116,6 +150,7 @@ public class Game {
 
 
     public int right(ImageView[][] imageViews, int[][] textViewValues, int score) {
+        this.movementSuccessful = false;
         for (int i = 0; i < textViewValues.length; i++) {
             for (int j = textViewValues.length - 2; j >= 0; j--) {
                 imageViews[i][j].setImageDrawable(null);
@@ -123,6 +158,7 @@ public class Game {
                     if (textViewValues[i][k] != 0 && textViewValues[i][k + 1] == 0) {
                         textViewValues[i][k + 1] = textViewValues[i][k];
                         textViewValues[i][k] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }
@@ -133,6 +169,8 @@ public class Game {
                     textViewValues[i][j + 1] += textViewValues[i][j];
                     score += textViewValues[i][j + 1];
                     textViewValues[i][j] = 0;
+                    this.movementSuccessful = true;
+                    this.firstMovement = false;
                 }
             }
         }
@@ -142,6 +180,7 @@ public class Game {
                     if (textViewValues[i][k] != 0 && textViewValues[i][k + 1] == 0) {
                         textViewValues[i][k + 1] = textViewValues[i][k];
                         textViewValues[i][k] = 0;
+                        this.movementSuccessful = true;
                     }
                 }
             }

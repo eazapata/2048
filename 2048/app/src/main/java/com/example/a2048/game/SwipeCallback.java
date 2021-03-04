@@ -1,4 +1,4 @@
-package com.example.a2048;
+package com.example.a2048.game;
 
 public interface SwipeCallback {
     void onSwipe(Direction direction);

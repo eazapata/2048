@@ -13,15 +13,21 @@ import com.example.a2048.R;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText zoneEdit, playerNameEdit;
+    private EditText zoneEdit, playerNameEdit,scoreEdit,idEdit;
     private Button show, save;
+    private DataBaseHelper dataBaseHelper;
+    private DataBaseAdapter dataBaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        zoneEdit = (EditText) findViewById(R.id.zone_edit);
+        idEdit = (EditText)findViewById(R.id.player_id_edit);
+        idEdit.setEnabled(false);
         playerNameEdit = (EditText) findViewById(R.id.player_name_edit);
+        zoneEdit = (EditText) findViewById(R.id.zone_edit);
+        scoreEdit = (EditText) findViewById(R.id.player_score_edit);
+        scoreEdit.setEnabled(false);
         show = (Button) findViewById(R.id.show_edit);
         save = (Button) findViewById(R.id.save_edit);
         save.setOnClickListener(this);
@@ -29,9 +35,12 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        idEdit.setText(String.valueOf(extras.getInt("KEY ID")));
         playerNameEdit.setText(extras.getString("PLAYER NAME"));
-        zoneEdit.setText(extras.getString("PLAYER Country"));
+        zoneEdit.setText(extras.getString("PLAYER COUNTRY"));
+        scoreEdit.setText(String.valueOf(extras.getInt("PLAYER SCORE")));
 
+        dataBaseHelper = new DataBaseHelper(this);
     }
 
     @Override
@@ -40,11 +49,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         switch (text) {
             case "Save":
                 Score score = new Score();
+                score.setId(Integer.parseInt(idEdit.getText().toString()));
                 score.setPlayer(String.valueOf(playerNameEdit.getText()));
                 score.setCountry(String.valueOf(zoneEdit.getText()));
-                DataBaseHelper dataBaseHelper = new DataBaseHelper(this,"score",null,1);
-                dataBaseHelper.insertScore(score);
+                score.setPlayerScore(Integer.parseInt(scoreEdit.getText().toString()));
+                dataBaseHelper.update(score);
                 Toast.makeText(this,"Registro guardado",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this,ScoresActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case "Show":
 

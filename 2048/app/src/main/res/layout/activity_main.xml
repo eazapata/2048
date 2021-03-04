@@ -1,55 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="2"
+    android:weightSum="4"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    tools:context=".game.MainActivity"
+    android:forceDarkAllowed="false">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="2048"
+            android:textSize="@dimen/splash_title_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/white"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="20"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/captura2048"/>
+    </LinearLayout>
 
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
+        android:forceDarkAllowed="false"
         android:columnCount="2"
         android:rowCount="3"
         android:layout_above="@+id/grid">
 
-        <TextView
+        <ImageView
             android:id="@+id/score"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
-            android:text="@string/score" />
+            android:src="@drawable/score" />
 
-        <TextView
+        <ImageView
             android:id="@+id/max_score"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
-            android:text="@string/max_score" />
+            android:src="@drawable/topscore"/>
 
         <TextView
             android:id="@+id/score_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="@dimen/splash_title_size" />
+            android:layout_marginRight="@dimen/splash_title_size"/>
 
         <TextView
             android:id="@+id/max_score_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="22dp"
             android:layout_marginRight="@dimen/splash_title_size" />
         <TextView
             android:id="@+id/player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
             android:text="@string/player_name"/>
@@ -57,6 +84,7 @@
             android:id="@+id/player_name_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
             android:text="@string/player_name"/>
@@ -230,25 +258,23 @@
             android:gravity="center"
             android:textStyle="bold" />
     </GridLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/new_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="52dp"
+            android:text="@string/new_game"
+            android:backgroundTint="@color/brown" />
+        <Button
+            android:id="@+id/undo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="52dp"
+            android:text="@string/undo"
+            android:backgroundTint="@color/brown"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/new_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/grid"
-        android:layout_marginBottom="52dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/new_game"
-        android:backgroundTint="@color/brown"
-        android:layout_marginStart="52dp" />
-    <Button
-        android:id="@+id/undo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/grid"
-        android:layout_toRightOf="@+id/new_game"
-        android:layout_marginBottom="52dp"
-        android:layout_marginLeft="52dp"
-        android:text="@string/undo"
-        android:backgroundTint="@color/brown"/>
-</RelativeLayout>
+</LinearLayout>

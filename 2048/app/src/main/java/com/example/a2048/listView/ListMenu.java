@@ -11,10 +11,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.a2048.DataBase.ScoresActivity;
-import com.example.a2048.MainActivity;
 import com.example.a2048.R;
-import com.example.a2048.listView.Item;
-import com.example.a2048.listView.ListViewAdapter;
+import com.example.a2048.game.MainActivity;
 
 import java.util.ArrayList;
 

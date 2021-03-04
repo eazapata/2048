@@ -1,4 +1,4 @@
-package com.example.a2048;
+package com.example.a2048.game;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a2048.DataBase.DataBaseHelper;
 import com.example.a2048.DataBase.Score;
-import com.example.a2048.game.Game;
+import com.example.a2048.R;
 
 import java.util.Random;
 
@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int[][] textViewValues;
     private GridLayout grid;
     private SwipeListener swipeListener;
-    private TextView scoreTextView;
+    private TextView scoreTextView, maxScoreTextview;
     private int actualScore;
+    private int previousScore;
     private int[][] previousValues = new int[4][4];
     private Button undo;
     private Button newGame;
@@ -42,15 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         game = new Game();
         swipeListener = new SwipeListener(this, this);
         scoreTextView = (TextView) findViewById(R.id.score_field);
+        maxScoreTextview = (TextView) findViewById(R.id.max_score_field);
         playerName = (TextView) findViewById(R.id.player_name_field);
-
+        dataBaseHelper = new DataBaseHelper(this);
+        setMaxScore();
         scoreTextView.setText("0");
-        dataBaseHelper = new DataBaseHelper(this, "score", null, 1);
-        Intent intent = getIntent();
-
-        Bundle extras = intent.getExtras();
-        player = extras.getString("PLAYER KEY");
-        playerName.setText(player);
+        setPlayerName();
         this.undo = (Button) findViewById(R.id.undo);
         this.undo.setOnClickListener(this);
         this.newGame = (Button) findViewById(R.id.new_game);
@@ -60,49 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         this.grid = (GridLayout) findViewById(R.id.grid);
         this.grid.setOnTouchListener(this);
         setRandomNumber();
-    }
-
-    @Override
-    public void onSwipe(Direction direction) {
-        copyArray();
-        switch (direction) {
-            case UP:
-                this.actualScore = game.up(imageViews, textViewValues, this.actualScore);
-                setRandomNumber();
-                break;
-            case DOWN:
-                this.actualScore = game.down(imageViews, textViewValues, this.actualScore);
-                setRandomNumber();
-                break;
-            case LEFT:
-                this.actualScore = game.left(imageViews, textViewValues, this.actualScore);
-                setRandomNumber();
-                break;
-            case RIGHT:
-                this.actualScore = game.right(imageViews, textViewValues, this.actualScore);
-                setRandomNumber();
-                break;
-            default:
-                System.out.println("Wrong direction");
-                break;
-        }
-        this.scoreTextView.setText(String.valueOf(this.actualScore));
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        swipeListener.onTouchEvent(event);
-        return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (((Button) v).getText() == this.undo.getText()) {
-            undoMovement();
-            System.out.println("Works");
-        } else if (((Button) v).getText() == this.newGame.getText()) {
-            newGame();
-        }
+        game.setFirstMovement(true);
     }
 
     private void copyArray() {
@@ -147,12 +103,72 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setRandomNumber();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (((Button) v).getText() == this.undo.getText()) {
+            undoMovement();
+            System.out.println("Works");
+        } else if (((Button) v).getText() == this.newGame.getText()) {
+            newGame();
+        }
+    }
+
+
+    @Override
+    public void onSwipe(Direction direction) {
+        copyArray();
+        this.previousScore = this.actualScore;
+        switch (direction) {
+            case UP:
+                this.actualScore = game.up(imageViews, textViewValues, this.actualScore);
+                break;
+            case DOWN:
+                this.actualScore = game.down(imageViews, textViewValues, this.actualScore);
+                break;
+            case LEFT:
+                this.actualScore = game.left(imageViews, textViewValues, this.actualScore);
+                break;
+            case RIGHT:
+                this.actualScore = game.right(imageViews, textViewValues, this.actualScore);
+                break;
+            default:
+                System.out.println("Wrong direction");
+                break;
+        }
+        if(game.isMovementSuccessful() || game.isFirstMovement()){
+            setRandomNumber();
+        }
+        this.scoreTextView.setText(String.valueOf(this.actualScore));
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        swipeListener.onTouchEvent(event);
+        return true;
+    }
+
     private void resetImages() {
         for (int i = 0; i < imageViews.length; i++) {
             for (int j = 0; j < imageViews[i].length; j++) {
                 imageViews[i][j].setImageDrawable(null);
             }
         }
+    }
+
+    private void setMaxScore() {
+        int score = dataBaseHelper.getMaxScore();
+        maxScoreTextview.setText(String.valueOf(score));
+    }
+
+    private void setPlayerName() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        player = extras.getString("PLAYER KEY");
+        if (player.equals("")) {
+            player = "Player";
+        }
+        playerName.setText(player);
+
     }
 
     public void setRandomNumber() {
@@ -176,8 +192,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 Random random = new Random();
                 int pos1 = random.nextInt(4);
                 int pos2 = random.nextInt(4);
-                int[] numbers = {2, 4};
-                int value = numbers[random.nextInt(2)];
+                int[] numbers = {2, 2, 2, 4};
+                int value = numbers[random.nextInt(numbers.length)];
                 while (this.textViewValues[pos1][pos2] != 0) {
                     pos1 = random.nextInt(4);
                     pos2 = random.nextInt(4);
@@ -197,6 +213,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private void undoMovement() {
         resetImages();
+        this.actualScore = this.previousScore;
+        scoreTextView.setText(String.valueOf(this.previousScore));
         for (int i = 0; i < textViewValues.length; i++) {
             for (int j = 0; j < textViewValues[i].length; j++) {
                 textViewValues[i][j] = previousValues[i][j];

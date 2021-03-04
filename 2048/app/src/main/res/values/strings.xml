@@ -14,4 +14,13 @@
     <string name="save">Save</string>
     <string name="show">Show</string>
     <string name="player_name_hint">Player name</string>
+    <string-array name="search_options">
+        <item>Name</item>
+        <item>Score</item>
+    </string-array>
+    <string-array name="score_options">
+        <item> Greater </item>
+        <item> Lower </item>
+        <item> Equals </item>
+    </string-array>
 </resources>

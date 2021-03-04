@@ -1,4 +1,4 @@
-package com.example.a2048;
+package com.example.a2048.game;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.a2048.R;
 import com.example.a2048.listView.ListMenu;
 
 public class SplashActivity extends AppCompatActivity {

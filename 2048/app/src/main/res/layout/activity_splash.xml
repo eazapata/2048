@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".SplashActivity">
+    tools:context=".game.SplashActivity"
+    android:forceDarkAllowed="false">
 
     <TextView
         android:id="@+id/appTitle"

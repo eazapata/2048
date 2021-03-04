@@ -1,5 +1,6 @@
 package com.example.a2048.DataBase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a2048.MainActivity;
 import com.example.a2048.R;
 
 import java.util.ArrayList;
@@ -54,31 +54,35 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
 
     @Override
     public void onBindViewHolder(@NonNull scoreView holder, int position) {
-        final Score score = scoreList.get(position);
-        holder.playerCardview.setText(score.getPlayer());
-        holder.countryCardview.setText(score.getCountry());
-        holder.scoreCardview.setText(String.valueOf(score.getPlayerScore()));
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dataBaseHelper.delete(score.getId());
-                scoreList.remove(score);
-                notifyDataSetChanged();
-            }
-        });
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EditActivity.class);
-                intent.putExtra("PLAYER SCORE",score.getPlayerScore());
-                intent.putExtra("PLAYER NAME",score.getPlayer());
-                intent.putExtra("PLAYER Country",score.getCountry());
-                context.startActivity(intent);
+          if(position < scoreList.size()){
 
-            }
-        });
+              final Score score = scoreList.get(position);
+              holder.playerCardview.setText(score.getPlayer());
+              holder.countryCardview.setText(score.getCountry());
+              holder.scoreCardview.setText(String.valueOf(score.getPlayerScore()));
+              holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      dataBaseHelper.delete(score.getId());
+                      scoreList.remove(score);
+                      notifyDataSetChanged();
+                  }
+              });
+              holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      Intent intent = new Intent(context, EditActivity.class);
+                      intent.putExtra("KEY ID",score.getId());
+                      intent.putExtra("PLAYER SCORE",score.getPlayerScore());
+                      intent.putExtra("PLAYER NAME",score.getPlayer());
+                      intent.putExtra("PLAYER COUNTRY",score.getCountry());
+                      context.startActivity(intent);
+                      ((ScoresActivity)context).finish();
 
+                  }
+              });
 
+          }
     }
 
     @Override

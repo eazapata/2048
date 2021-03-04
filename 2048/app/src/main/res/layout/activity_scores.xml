@@ -7,37 +7,64 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
-        <Button
-            android:id="@+id/score_query"
+        android:gravity="center"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/searchTextView"
+            android:text="Search by: "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score"/>
-        <Button
-            android:id="@+id/name_query"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinner_search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Player"/>
-        <Button
-            android:id="@+id/time_query"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time"/>
-        <Button
-            android:id="@+id/country_query"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Country"/>
-
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/name_search"
+            android:hint="Set the name to search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/score_layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/search_score"
+            android:text="Sort by: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinner_score_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/score_search"
+            android:hint="Set the score to search"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/seach_scores_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:onClick="search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_score"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:forceDarkAllowed="false">
 
 
     </androidx.recyclerview.widget.RecyclerView>
