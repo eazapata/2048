@@ -1,7 +1,5 @@
 package com.example.a2048.DataBase;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,8 +25,9 @@ public class ScoresActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scores);
-
+        dataBaseHelper = new DataBaseHelper(this, "score", null, 1);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_score);
+
         score = (Button) findViewById(R.id.score_query);
         score.setOnClickListener(this);
         player = (Button) findViewById(R.id.name_query);
@@ -37,33 +36,17 @@ public class ScoresActivity extends AppCompatActivity implements View.OnClickLis
         time.setOnClickListener(this);
         country = (Button) findViewById(R.id.country_query);
         country.setOnClickListener(this);
-        scores = new ArrayList<>();
-        dataBaseHelper = new DataBaseHelper(this, "score", null, 1);
-        loadData();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dataBaseAdapter = new DataBaseAdapter(scores, this,dataBaseHelper);
-        recyclerView.setAdapter(dataBaseAdapter);
 
+        scores = new ArrayList<>();
+        loadData();
+        dataBaseAdapter = new DataBaseAdapter(scores, this, dataBaseHelper);
+        recyclerView.setAdapter(dataBaseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
     public void loadData() {
         scores = (ArrayList<Score>) dataBaseHelper.getAllScores();
-    }
-
-    public void showData() {
-        SQLiteDatabase sqLiteDatabase = dataBaseHelper.getReadableDatabase();
-        Score score = null;
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM persona", null);
-        while (cursor.moveToNext()) {
-            score = new Score();
-            score.setId(cursor.getInt(0));
-            score.setPlayer(cursor.getString(1));
-            score.setCountry(cursor.getString(2));
-            score.setPlayerScore(cursor.getInt(3));
-
-            //  personaAdapter.agregarPersona(persona);
-        }
     }
 
     @Override

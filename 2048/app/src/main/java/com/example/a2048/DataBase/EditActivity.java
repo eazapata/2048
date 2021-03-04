@@ -1,5 +1,6 @@
 package com.example.a2048.DataBase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,12 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         save = (Button) findViewById(R.id.save_edit);
         save.setOnClickListener(this);
         show.setOnClickListener(this);
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        playerNameEdit.setText(extras.getString("PLAYER NAME"));
+        zoneEdit.setText(extras.getString("PLAYER Country"));
+
     }
 
     @Override

@@ -4,21 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondotutorial"
+    android:background="@color/background"
     tools:context=".DataBase.EditActivity"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+        <TextView
+            android:text="2048"
+            android:textSize="@dimen/splash_title_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/brown"
+            android:layout_marginBottom="50dp"
+            android:shadowColor="@android:color/white"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="20"/>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/captura2048"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:text="Edit Score"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textAlignment="center"
             android:textStyle="bold"
             />
@@ -29,7 +47,7 @@
         android:layout_height="wrap_content"
         android:hint="Player name"
         android:inputType="text"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="20dp"/>
     <EditText
         android:id="@+id/zone_edit"
         android:layout_width="match_parent"

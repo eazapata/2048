@@ -3,6 +3,7 @@ package com.example.a2048.DataBase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -143,6 +144,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return getScoresByParam;
     }
-
 }
 
