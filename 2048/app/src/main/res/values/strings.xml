@@ -19,8 +19,8 @@
         <item>Score</item>
     </string-array>
     <string-array name="score_options">
-        <item> Greater </item>
-        <item> Lower </item>
-        <item> Equals </item>
+        <item> &#62; </item>
+        <item> &#60; </item>
+        <item> &#61; </item>
     </string-array>
 </resources>

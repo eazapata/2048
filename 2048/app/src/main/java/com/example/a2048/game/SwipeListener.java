@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import com.example.a2048.game.SwipeCallback;
 
 public class SwipeListener implements GestureDetector.OnGestureListener {
 

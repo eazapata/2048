@@ -18,16 +18,14 @@ import com.example.a2048.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoresActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class ScoresActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {
 
-    RecyclerView recyclerView;
-    List<Score> scores;
-    DataBaseHelper dataBaseHelper;
-    DataBaseAdapter dataBaseAdapter;
-    Spinner spinnerSearch, spinnerScores;
-    private EditText nameSearch;
-    private Button score, player, time, country;
-    private String[] scoreOptions = {"<", ">", "="};
+    private RecyclerView recyclerView;
+    private List<Score> scores;
+    private DataBaseHelper dataBaseHelper;
+    private DataBaseAdapter dataBaseAdapter;
+    private Spinner spinnerSearch, spinnerScores;
+    private EditText nameSearch,scoreSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class ScoresActivity extends AppCompatActivity implements View.OnClickLis
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSearch.setAdapter(adapter);
         nameSearch = (EditText) findViewById(R.id.name_search);
+        scoreSearch = (EditText)findViewById(R.id.score_search);
 
         spinnerScores = (Spinner) findViewById(R.id.spinner_score_options);
         spinnerScores.setOnItemSelectedListener(this);
@@ -62,33 +61,18 @@ public class ScoresActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void loadData() {
-        scores = (ArrayList<Score>) dataBaseHelper.getAllScores();
+        scores =  dataBaseHelper.getAllScores();
     }
 
-    @Override
-    public void onClick(View v) {
-        String text = (String) ((Button) v).getText();
-        switch (text) {
-            case "Score":
-                scores = dataBaseHelper.getScoresBy(text);
-                dataBaseAdapter.scoreList = scores;
-                dataBaseAdapter.notifyDataSetChanged();
-                break;
-            case "Player":
-                dataBaseHelper.getScoresBy(text);
-                break;
-            default:
-                System.out.println("view not found");
-        }
-
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.score_layout_search);
         switch (position) {
             case 0:
-                layout.setVisibility(View.GONE);
+                if(spinnerSearch.getSelectedItem().toString().equals("Name")){
+                    layout.setVisibility(View.GONE);
+                }
                 break;
             case 1:
                 layout.setVisibility(View.VISIBLE);
@@ -107,7 +91,12 @@ public class ScoresActivity extends AppCompatActivity implements View.OnClickLis
 
         if (spinnerSearch.getSelectedItem().toString().equals("Name")) {
             scores = dataBaseHelper.getScoresByName(nameSearch.getText().toString());
-            dataBaseAdapter.scoreList = scores;
+            dataBaseAdapter.setScoreList(scores);
+            dataBaseAdapter.notifyDataSetChanged();
+        }else if(spinnerSearch.getSelectedItem().toString().equals("Score")){
+            scores = dataBaseHelper.getScoresByScore(nameSearch.getText().toString(),spinnerScores.getSelectedItem().toString(),
+                    scoreSearch.getText().toString());
+            dataBaseAdapter.setScoreList(scores);
             dataBaseAdapter.notifyDataSetChanged();
         }
     }

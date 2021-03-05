@@ -114,11 +114,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Score> getScoresByName(String name) {
-        if (name.equals(null)) {
+       /* if (name.equals("")) {
             name = " ";
-        }
+        }*/
         List<Score> getScoresByParam = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE + " where " + PLAYER_NAME + " like '%" + name + "%'";
+        String query = "SELECT * " +
+                "FROM " + TABLE +
+                " where " + PLAYER_NAME + " like '%" + name + "%' order by " + SCORE + " desc";
         Cursor cursor = null;
         try {
             if (mReadableDB == null) {
@@ -147,55 +149,46 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<Score> getScoresBy(String order) {
-        String getScoresBy = null;
+    public List<Score> getScoresByScore(String name, String sign, String value) {
+       /* if (name.equals("")) {
+            name = " ";
+        }*/
+        if (value.equals("")) {
+            value = "0";
+        }
         List<Score> getScoresByParam = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        switch (order) {
-            case "Score":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + SCORE + " asc";
-                break;
-            case "ByScoreDesc":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + SCORE + " desc";
-                break;
-            case "ByUsername":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + PLAYER_NAME + " desc";
-                break;
-            case "ByUsernameDesc":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + PLAYER_NAME;
-                break;
-            case "ByCountry":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + COUNTRY + " desc";
-                break;
-            case "ByCountryDesc":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + COUNTRY;
-                break;
-            case "ByDuration":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + "GAME_DURATION_TABLE" + " desc";
-                break;
-            case "ByDurationDesc":
-                getScoresBy = "SELECT * FROM " + TABLE + " order by " + "GAME_DURATION_TABLE";
-                break;
-        }
-        Cursor cursor = db.rawQuery(getScoresBy, null);
-        if (cursor.moveToNext()) {
-            do {
-                int scoreId = cursor.getInt(0);
-                String username = cursor.getString(1);
-                String country = cursor.getString(2);
-                Integer score = cursor.getInt(3);
-                Score newScore = new Score(scoreId, username, score, country);
-                getScoresByParam.add(newScore);
+        String query = "SELECT * " +
+                "FROM " + TABLE +
+                " where " + PLAYER_NAME + " like '%" + name + "%' and " +
+                SCORE + " " + sign + " " + value + " order by " + SCORE + " desc";
+        Cursor cursor = null;
+        try {
+            if (mReadableDB == null) {
+                mReadableDB = getReadableDatabase();
             }
-            while (cursor.moveToNext());
-        } else {
-            //There aren't scores. No scores will be displayed
+            cursor = mReadableDB.rawQuery(query, null);
+            if (cursor.moveToNext()) {
+                do {
+                    int scoreId = cursor.getInt(0);
+                    String username = cursor.getString(1);
+                    String country = cursor.getString(2);
+                    Integer score = cursor.getInt(3);
+                    Score newScore = new Score(scoreId, username, score, country);
+                    getScoresByParam.add(newScore);
+                }
+                while (cursor.moveToNext());
+            } else {
+                //There aren't scores. No scores will be displayed
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "EXCEPTION! " + e);
+        } finally {
+            cursor.close();
+            return getScoresByParam;
         }
-        cursor.close();
-        // db.close();
 
-        return getScoresByParam;
     }
+
 
     public void insertScore(Score score) {
         if (mWritableDB == null) {

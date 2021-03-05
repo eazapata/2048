@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         this.grid = (GridLayout) findViewById(R.id.grid);
         this.grid.setOnTouchListener(this);
         setRandomNumber();
-        game.setFirstMovement(true);
     }
 
     private void copyArray() {
@@ -135,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 System.out.println("Wrong direction");
                 break;
         }
-        if(game.isMovementSuccessful() || game.isFirstMovement()){
+        if(game.isMovementSuccessful()){
             setRandomNumber();
         }
         this.scoreTextView.setText(String.valueOf(this.actualScore));
@@ -180,15 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             dataBaseHelper.insertScore(score);
             finish();
         } else {
-            boolean freeSpace = false;
-            for (int x = 0; x < 4; x++) {
-                for (int y = 0; y < 4; y++) {
-                    if (textViewValues[x][y] == 0) {
-                        freeSpace = true;
-                    }
-                }
-            }
-            if (freeSpace) {
+            if (game.checkGrid(textViewValues)) {
                 Random random = new Random();
                 int pos1 = random.nextInt(4);
                 int pos2 = random.nextInt(4);
