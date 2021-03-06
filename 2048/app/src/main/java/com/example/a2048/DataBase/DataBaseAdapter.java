@@ -30,14 +30,13 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
         this.scoreList = scoreList;
     }
 
-    public DataBaseAdapter(List<Score> scoreList, Context context, DataBaseHelper dataBaseHelper) {
-        this.scoreList = scoreList;
+    public DataBaseAdapter(Context context, DataBaseHelper dataBaseHelper) {
         this.context = context;
         this.dataBaseHelper = dataBaseHelper;
     }
 
     public class scoreView extends RecyclerView.ViewHolder {
-        private TextView playerCardview, scoreCardview, countryCardview;
+        private TextView playerCardview, scoreCardview, durationCardview;
         private ImageView btnEdit, btnDelete;
 
         public scoreView(@NonNull View itemView) {
@@ -45,8 +44,7 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
 
             playerCardview = (TextView) itemView.findViewById(R.id.player_cardview);
             scoreCardview = (TextView) itemView.findViewById(R.id.score_cardview);
-            countryCardview = (TextView) itemView.findViewById(R.id.country_cardview);
-
+            durationCardview = (TextView) itemView.findViewById(R.id.duration_cardview);
             btnEdit = (ImageView) itemView.findViewById(R.id.imageEdit);
             btnDelete = (ImageView) itemView.findViewById(R.id.imageDelete);
         }
@@ -61,16 +59,14 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
 
     @Override
     public void onBindViewHolder(@NonNull scoreView holder, int position) {
-        if (position < scoreList.size()) {
-
             final Score score = scoreList.get(position);
             holder.playerCardview.setText(score.getPlayer());
-            holder.countryCardview.setText(score.getCountry());
+            holder.durationCardview.setText(score.getTime());
             holder.scoreCardview.setText(String.valueOf(score.getPlayerScore()));
             holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dataBaseHelper.delete(score.getId());
+                    dataBaseHelper.delete(score);
                     scoreList.remove(score);
                     notifyDataSetChanged();
                 }
@@ -82,20 +78,15 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
                     intent.putExtra("KEY ID", score.getId());
                     intent.putExtra("PLAYER SCORE", score.getPlayerScore());
                     intent.putExtra("PLAYER NAME", score.getPlayer());
-                    intent.putExtra("PLAYER COUNTRY", score.getCountry());
+                    intent.putExtra("PLAYER COUNTRY", score.getTime());
                     context.startActivity(intent);
-                    ((ScoresActivity) context).finish();
 
                 }
             });
-
-        }
     }
 
     @Override
     public int getItemCount() {
         return scoreList.size();
     }
-
-
 }

@@ -1,20 +1,21 @@
 package com.example.a2048.DataBase;
 
+
 public class Score {
 
     private String player;
     private int playerScore;
     private int id;
-    private String country;
+    private String time;
 
     public Score() {
     }
 
-    public Score(int id,String player, int playerScore,String country) {
+    public Score(int id,String player, int playerScore,String time) {
         this.player = player;
         this.playerScore = playerScore;
         this.id = id;
-        this.country = country;
+        this.time = time;
     }
 
     public String getPlayer() {
@@ -41,11 +42,11 @@ public class Score {
         this.id = id;
     }
 
-    public String getCountry() {
-        return country;
+    public String getTime() {
+        return time;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setTime(String country) {
+        this.time = country;
     }
 }

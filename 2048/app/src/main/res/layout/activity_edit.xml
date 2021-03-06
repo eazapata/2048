@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:text="2048"
+            android:text="@string/_2048"
             android:textSize="@dimen/splash_title_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textColor="@android:color/white"
-            android:text="Edit Score"
+            android:textColor="@color/brown"
+            android:text="@string/edit_score"
             android:textSize="20sp"
             android:textAlignment="center"
             android:textStyle="bold"
@@ -52,15 +52,15 @@
         android:id="@+id/player_name_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Player name"
+        android:hint="@string/player_name"
         android:inputType="text"
         android:layout_marginTop="20dp"/>
     <EditText
-        android:id="@+id/zone_edit"
+        android:id="@+id/time_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Country"
-        android:inputType="text"
+        android:hint="@string/time"
+        android:inputType="time"
         android:layout_marginTop="10dp"/>
     <EditText
         android:id="@+id/player_score_edit"
@@ -73,9 +73,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save"/>
-    <Button
-        android:id="@+id/show_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/show"/>
 </LinearLayout>

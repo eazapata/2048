@@ -3,7 +3,6 @@ package com.example.a2048.DataBase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -26,7 +25,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + TABLE + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY, " +
                     PLAYER_NAME + " TEXT," +
-                    COUNTRY + " TEXT," +
                     SCORE + " INTEGER);";
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
@@ -46,32 +44,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public long count() {
-        if (mReadableDB == null) {
-            mReadableDB = getReadableDatabase();
-        }
-        return DatabaseUtils.queryNumEntries(mReadableDB, TABLE);
-    }
-
-    public int delete(int id) {
-        int deleted = 0;
+    public void delete(Score score) {
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
             }
-            deleted = mWritableDB.delete(TABLE,
-                    KEY_ID + " = ? ", new String[]{String.valueOf(id)});
+             mWritableDB.delete(TABLE,KEY_ID + " = ? ", new String[]{String.valueOf(score.getId())});
         } catch (Exception e) {
             Log.d(TAG, "DELETE EXCEPTION! " + e.getMessage());
         }
-        return deleted;
     }
 
     public List<Score> getAllScores() {
         List<Score> getAllScores = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
+
         String queryAllScores = "SELECT * FROM " + TABLE + " order by " + SCORE + " desc";
-        Cursor cursor = db.rawQuery(queryAllScores, null);
+        if (mReadableDB == null) {
+            mReadableDB = getReadableDatabase();
+        }
+        Cursor cursor = mReadableDB.rawQuery(queryAllScores, null);
         if (cursor.moveToNext()) {
             do {
                 int scoreId = cursor.getInt(0);
@@ -86,7 +77,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             //There aren't scores. No scores will be displayed
         }
         cursor.close();
-        db.close();
         return getAllScores;
     }
 
@@ -99,12 +89,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 mReadableDB = getReadableDatabase();
             }
             cursor = mReadableDB.rawQuery(query, null);
-            cursor.moveToFirst();
-            score.setId(cursor.getInt(0));
-            score.setPlayer(cursor.getString(1));
-            score.setCountry(cursor.getString(2));
-            score.setPlayerScore(cursor.getInt(3));
-
+            if (cursor.moveToNext()) {
+                cursor.moveToFirst();
+                score.setId(cursor.getInt(0));
+                score.setPlayer(cursor.getString(1));
+                score.setTime(cursor.getString(2));
+                score.setPlayerScore(cursor.getInt(3));
+            }
         } catch (Exception e) {
             Log.d(TAG, "EXCEPTION! " + e);
         } finally {
@@ -120,7 +111,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Score> getScoresByParam = new ArrayList<>();
         String query = "SELECT * " +
                 "FROM " + TABLE +
-                " where " + PLAYER_NAME + " like '%" + name + "%' order by " + SCORE + " desc";
+                " where " + PLAYER_NAME + " like '%" + name + "%' order by " + PLAYER_NAME + " desc";
         Cursor cursor = null;
         try {
             if (mReadableDB == null) {
@@ -150,45 +141,47 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Score> getScoresByScore(String name, String sign, String value) {
+        List<Score> getScoresByParam = new ArrayList<>();
        /* if (name.equals("")) {
             name = " ";
         }*/
         if (value.equals("")) {
             value = "0";
         }
-        List<Score> getScoresByParam = new ArrayList<>();
-        String query = "SELECT * " +
-                "FROM " + TABLE +
-                " where " + PLAYER_NAME + " like '%" + name + "%' and " +
-                SCORE + " " + sign + " " + value + " order by " + SCORE + " desc";
-        Cursor cursor = null;
-        try {
-            if (mReadableDB == null) {
-                mReadableDB = getReadableDatabase();
-            }
-            cursor = mReadableDB.rawQuery(query, null);
-            if (cursor.moveToNext()) {
-                do {
-                    int scoreId = cursor.getInt(0);
-                    String username = cursor.getString(1);
-                    String country = cursor.getString(2);
-                    Integer score = cursor.getInt(3);
-                    Score newScore = new Score(scoreId, username, score, country);
-                    getScoresByParam.add(newScore);
+        if(Integer.parseInt(value) > 0){
+
+            String query = "SELECT * " +
+                    "FROM " + TABLE +
+                    " where " + PLAYER_NAME + " like '%" + name + "%' and " +
+                    SCORE + " " + sign + " " + value + " order by " + SCORE + " desc";
+            Cursor cursor = null;
+            try {
+                if (mReadableDB == null) {
+                    mReadableDB = getReadableDatabase();
                 }
-                while (cursor.moveToNext());
-            } else {
-                //There aren't scores. No scores will be displayed
+                cursor = mReadableDB.rawQuery(query, null);
+                if (cursor.moveToNext()) {
+                    do {
+                        int scoreId = cursor.getInt(0);
+                        String username = cursor.getString(1);
+                        String country = cursor.getString(2);
+                        Integer score = cursor.getInt(3);
+                        Score newScore = new Score(scoreId, username, score, country);
+                        getScoresByParam.add(newScore);
+                    }
+                    while (cursor.moveToNext());
+                } else {
+                    //There aren't scores. No scores will be displayed
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "EXCEPTION! " + e);
+            } finally {
+                cursor.close();
+                return getScoresByParam;
             }
-        } catch (Exception e) {
-            Log.d(TAG, "EXCEPTION! " + e);
-        } finally {
-            cursor.close();
-            return getScoresByParam;
         }
-
+        return  getScoresByParam;
     }
-
 
     public void insertScore(Score score) {
         if (mWritableDB == null) {
@@ -196,37 +189,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         ContentValues values = new ContentValues();
         values.put(PLAYER_NAME, score.getPlayer());
-        values.put(COUNTRY, score.getCountry());
+        values.put(COUNTRY, score.getTime());
         values.put(SCORE, score.getPlayerScore());
         mWritableDB.insert(TABLE, null, values);
 
     }
-
-    public Score query(int position) {
-        String query = "SELECT * FROM " + TABLE +
-                " ORDER BY " + KEY_ID + " DESC " +
-                "LIMIT " + position + ",1";
-        Cursor cursor = null;
-        Score score = new Score();
-        try {
-            if (mReadableDB == null) {
-                mReadableDB = getReadableDatabase();
-            }
-            cursor = mReadableDB.rawQuery(query, null);
-            cursor.moveToFirst();
-            score.setId(cursor.getInt(0));
-            score.setPlayer(cursor.getString(1));
-            score.setCountry(cursor.getString(2));
-            score.setPlayerScore(cursor.getInt(3));
-
-        } catch (Exception e) {
-            Log.d(TAG, "EXCEPTION! " + e);
-        } finally {
-            cursor.close();
-            return score;
-        }
-    }
-
 
     public int update(Score score) {
         int mNumberOfRowsUpdated = -1;
@@ -237,7 +204,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_ID, score.getId());
             values.put(PLAYER_NAME, score.getPlayer());
-            values.put(COUNTRY, score.getCountry());
+            values.put(COUNTRY, score.getTime());
             values.put(SCORE, score.getPlayerScore());
             mNumberOfRowsUpdated = mWritableDB.update(TABLE, values, KEY_ID + " = ?",
                     new String[]{String.valueOf(score.getId())});
@@ -247,6 +214,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return mNumberOfRowsUpdated;
     }
-
 }
 

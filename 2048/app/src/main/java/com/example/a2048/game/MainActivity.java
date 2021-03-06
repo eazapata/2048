@@ -1,10 +1,15 @@
 package com.example.a2048.game;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private TextView playerName;
     private DataBaseHelper dataBaseHelper;
     private String player;
+    private Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         maxScoreTextview = (TextView) findViewById(R.id.max_score_field);
         playerName = (TextView) findViewById(R.id.player_name_field);
         dataBaseHelper = new DataBaseHelper(this);
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.start();
         setMaxScore();
         scoreTextView.setText("0");
         setPlayerName();
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         this.grid = (GridLayout) findViewById(R.id.grid);
         this.grid.setOnTouchListener(this);
         setRandomNumber();
+        copyArray();
     }
 
     private void copyArray() {
@@ -97,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         this.textViewValues = null;
         this.textViewValues = new int[4][4];
         this.actualScore = 0;
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.stop();
+        chronometer.start();
         this.scoreTextView.setText(String.valueOf(0));
         resetImages();
         setRandomNumber();
@@ -154,6 +166,43 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
+    private void savePlayerData(){
+        chronometer.stop();
+        Score score = new Score();
+        score.setPlayer(player);
+        score.setPlayerScore(this.actualScore);
+        score.setTime(chronometer.getText().toString());
+        dataBaseHelper.insertScore(score);
+    }
+
+    private void setGameOver(){
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.game_over);
+
+        Button retry = dialog.findViewById(R.id.retry);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                savePlayerData();
+                newGame();
+                dialog.dismiss();
+            }
+        });
+        Button exit = dialog.findViewById(R.id.exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                savePlayerData();
+                dialog.dismiss();
+                finish();
+            }
+        });
+        dialog.setCancelable(true);
+        dialog.show();
+    }
+
     private void setMaxScore() {
         int score = dataBaseHelper.getMaxScore();
         maxScoreTextview.setText(String.valueOf(score));
@@ -173,11 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void setRandomNumber() {
         boolean play = game.checkEndgame(this.textViewValues);
         if (play) {
-            Score score = new Score();
-            score.setPlayer(player);
-            score.setPlayerScore(this.actualScore);
-            dataBaseHelper.insertScore(score);
-            finish();
+           setGameOver();
         } else {
             if (game.checkGrid(textViewValues)) {
                 Random random = new Random();
@@ -200,7 +245,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         }
     }
-
 
     private void undoMovement() {
         resetImages();

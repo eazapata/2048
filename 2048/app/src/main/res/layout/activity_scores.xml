@@ -4,14 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DataBase.ScoresActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <TextView
+            android:text="2048"
+            android:textSize="@dimen/splash_title_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/brown"
+            android:shadowColor="@android:color/white"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="20"/>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/captura2048"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_margin="10dp">
+        android:layout_margin="20dp">
         <TextView
             android:id="@+id/searchTextView"
             android:text="Search by: "
@@ -34,7 +58,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_margin="10dp">
+        android:layout_margin="20dp"
+        >
         <TextView
             android:id="@+id/search_score"
             android:text="Sort by: "

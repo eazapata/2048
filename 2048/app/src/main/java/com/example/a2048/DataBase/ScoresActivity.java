@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,14 +19,13 @@ import com.example.a2048.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoresActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {
+public class ScoresActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private List<Score> scores;
     private DataBaseHelper dataBaseHelper;
     private DataBaseAdapter dataBaseAdapter;
     private Spinner spinnerSearch, spinnerScores;
-    private EditText nameSearch,scoreSearch;
+    private EditText nameSearch, scoreSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class ScoresActivity extends AppCompatActivity implements  AdapterView.On
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSearch.setAdapter(adapter);
         nameSearch = (EditText) findViewById(R.id.name_search);
-        scoreSearch = (EditText)findViewById(R.id.score_search);
+        scoreSearch = (EditText) findViewById(R.id.score_search);
 
         spinnerScores = (Spinner) findViewById(R.id.spinner_score_options);
         spinnerScores.setOnItemSelectedListener(this);
@@ -51,17 +51,33 @@ public class ScoresActivity extends AppCompatActivity implements  AdapterView.On
         dataBaseHelper = new DataBaseHelper(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_score);
 
-        scores = new ArrayList<>();
+        dataBaseAdapter = new DataBaseAdapter(this, dataBaseHelper);
         loadData();
-        dataBaseAdapter = new DataBaseAdapter(scores, this, dataBaseHelper);
+
         recyclerView.setAdapter(dataBaseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper
+                .SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                dataBaseHelper.delete(dataBaseAdapter.getScoreList().get(viewHolder.getAdapterPosition()));
+                dataBaseAdapter.getScoreList().remove(viewHolder.getAdapterPosition());
+                dataBaseAdapter.notifyDataSetChanged();
+            }
+        });
+        helper.attachToRecyclerView(recyclerView);
 
 
     }
 
     public void loadData() {
-        scores =  dataBaseHelper.getAllScores();
+        dataBaseAdapter.setScoreList(dataBaseHelper.getAllScores());
     }
 
 
@@ -70,7 +86,7 @@ public class ScoresActivity extends AppCompatActivity implements  AdapterView.On
         LinearLayout layout = (LinearLayout) findViewById(R.id.score_layout_search);
         switch (position) {
             case 0:
-                if(spinnerSearch.getSelectedItem().toString().equals("Name")){
+                if (spinnerSearch.getSelectedItem().toString().equals("Name")) {
                     layout.setVisibility(View.GONE);
                 }
                 break;
@@ -87,16 +103,30 @@ public class ScoresActivity extends AppCompatActivity implements  AdapterView.On
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.dataBaseAdapter.setScoreList(dataBaseHelper.getAllScores());
+        this.dataBaseAdapter.notifyDataSetChanged();
+
+    }
+
     public void search(View v) {
 
         if (spinnerSearch.getSelectedItem().toString().equals("Name")) {
-            scores = dataBaseHelper.getScoresByName(nameSearch.getText().toString());
-            dataBaseAdapter.setScoreList(scores);
+            dataBaseAdapter.setScoreList( dataBaseHelper.getScoresByName(nameSearch.getText().toString()));
             dataBaseAdapter.notifyDataSetChanged();
-        }else if(spinnerSearch.getSelectedItem().toString().equals("Score")){
-            scores = dataBaseHelper.getScoresByScore(nameSearch.getText().toString(),spinnerScores.getSelectedItem().toString(),
-                    scoreSearch.getText().toString());
-            dataBaseAdapter.setScoreList(scores);
+
+        } else if (spinnerSearch.getSelectedItem().toString().equals("Score")) {
+          dataBaseAdapter.setScoreList(dataBaseHelper.getScoresByScore(
+                  nameSearch.getText().toString(),
+                  spinnerScores.getSelectedItem().toString(),
+                  scoreSearch.getText().toString()));
             dataBaseAdapter.notifyDataSetChanged();
         }
     }

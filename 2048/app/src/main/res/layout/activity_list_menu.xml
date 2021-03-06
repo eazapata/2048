@@ -27,14 +27,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:src="@drawable/captura2048"/>
-    <EditText
-        android:id="@+id/player_name_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_player_name"
-        android:textAlignment="center"
-        android:hint="@string/player_name_hint"
-        android:gravity="center_horizontal" />
+
 
     <ListView
         android:id="@+id/listView"

@@ -12,7 +12,6 @@
     android:forceDarkAllowed="false">
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -29,20 +28,19 @@
             android:shadowRadius="20"/>
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:src="@drawable/captura2048"/>
     </LinearLayout>
-
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_marginTop="20dp"
         android:forceDarkAllowed="false"
         android:columnCount="2"
-        android:rowCount="3"
+        android:rowCount="4"
         android:layout_above="@+id/grid">
 
         <ImageView
@@ -54,6 +52,7 @@
         <ImageView
             android:id="@+id/max_score"
             android:layout_width="100dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:src="@drawable/topscore"/>
 
@@ -63,20 +62,21 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="@dimen/splash_title_size"/>
+            android:layout_marginRight="@dimen/splash_title_size"
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/max_score_field"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:layout_marginLeft="22dp"
-            android:layout_marginRight="@dimen/splash_title_size" />
+            android:gravity="center_horizontal" />
         <TextView
             android:id="@+id/player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
             android:text="@string/player_name"/>
@@ -84,16 +84,33 @@
             android:id="@+id/player_name_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            />
+        <TextView
+            android:id="@+id/text_chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
             android:textColor="@android:color/black"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
-            android:text="@string/player_name"/>
+            />
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            android:textColor="@android:color/black"
+            />
     </GridLayout>
+
     <GridLayout
         android:id="@+id/grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="35dp"
+
+        android:layout_marginTop="20dp"
         android:background="@color/brownGrid"
         android:columnCount="4"
         android:rowCount="4">
@@ -259,20 +276,19 @@
             android:textStyle="bold" />
     </GridLayout>
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/new_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="52dp"
             android:text="@string/new_game"
             android:backgroundTint="@color/brown" />
         <Button
             android:id="@+id/undo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="52dp"
             android:text="@string/undo"
             android:backgroundTint="@color/brown"/>
     </LinearLayout>
