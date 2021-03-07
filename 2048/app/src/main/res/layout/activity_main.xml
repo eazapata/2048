@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:forceDarkAllowed="false"
         android:columnCount="2"
         android:rowCount="4"
         android:layout_above="@+id/grid">
@@ -60,7 +59,7 @@
             android:id="@+id/score_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
             android:gravity="center_horizontal" />
@@ -69,13 +68,14 @@
             android:id="@+id/max_score_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
             android:gravity="center_horizontal" />
         <TextView
             android:id="@+id/player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
@@ -85,14 +85,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
             />
         <TextView
             android:id="@+id/text_chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
             />
@@ -101,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
             />
     </GridLayout>
 

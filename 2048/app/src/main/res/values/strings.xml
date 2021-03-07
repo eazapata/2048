@@ -20,6 +20,9 @@
     <string name="enter_your_nickname">Enter your nickname</string>
     <string name="play">Play</string>
     <string name="retry">Retry</string>
+    <string name="set_the_name_to_search">Set the name</string>
+    <string name="search_by">Search by:</string>
+    <string name="player_id">Player ID:</string>
     <string-array name="search_options">
         <item>Name</item>
         <item>Score</item>

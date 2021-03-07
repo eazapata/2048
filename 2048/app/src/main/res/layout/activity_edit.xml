@@ -1,76 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".DataBase.EditActivity"
+    android:forceDarkAllowed="false"
     android:orientation="vertical"
-    android:forceDarkAllowed="false">
+    tools:context=".DataBase.EditActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
-            android:text="@string/_2048"
-            android:textSize="@dimen/splash_title_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/brown"
             android:layout_marginBottom="50dp"
             android:shadowColor="@android:color/white"
             android:shadowDx="0"
             android:shadowDy="0"
-            android:shadowRadius="20"/>
+            android:shadowRadius="20"
+            android:text="@string/_2048"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/splash_title_size" />
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/captura2048"/>
+            android:src="@drawable/captura2048" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textColor="@color/brown"
             android:text="@string/edit_score"
-            android:textSize="20sp"
             android:textAlignment="center"
-            android:textStyle="bold"
-            />
+            android:textColor="@color/brown"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
-    <EditText
-        android:id="@+id/player_id_edit"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        android:id="@+id/player_name_edit"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/textview_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/player_id" />
+
+        <EditText
+            android:id="@+id/player_id_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/player_name"
-        android:inputType="text"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        android:id="@+id/time_edit"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/textview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/player_name" />
+
+        <EditText
+            android:id="@+id/player_name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/player_name"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/time"
-        android:inputType="time"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:id="@+id/player_score_edit"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textview_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: " />
+
+        <EditText
+            android:id="@+id/time_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/time"
+            android:inputType="time" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:layout_marginTop="10dp"/>
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textview_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: " />
+
+        <EditText
+            android:id="@+id/player_score_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/save_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"/>
+        android:text="@string/save" />
 </LinearLayout>

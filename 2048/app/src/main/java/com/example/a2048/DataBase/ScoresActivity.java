@@ -1,12 +1,17 @@
 package com.example.a2048.DataBase;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +36,18 @@ public class ScoresActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scores);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            final WindowInsetsController insetsController = getWindow().getInsetsController();
+            if (insetsController != null) {
+                insetsController.hide(WindowInsets.Type.statusBars());
+            }
+        } else {
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+            );
+        }
 
         spinnerSearch = (Spinner) findViewById(R.id.spinner_search);
         spinnerSearch.setOnItemSelectedListener(this);
@@ -119,15 +136,23 @@ public class ScoresActivity extends AppCompatActivity implements AdapterView.OnI
     public void search(View v) {
 
         if (spinnerSearch.getSelectedItem().toString().equals("Name")) {
-            dataBaseAdapter.setScoreList( dataBaseHelper.getScoresByName(nameSearch.getText().toString()));
-            dataBaseAdapter.notifyDataSetChanged();
+            if(nameSearch.getText().toString().equals("")){
+                Toast.makeText(this,"Name not inserted",Toast.LENGTH_SHORT).show();
+            }else{
+                dataBaseAdapter.setScoreList( dataBaseHelper.getScoresByName(nameSearch.getText().toString()));
+                dataBaseAdapter.notifyDataSetChanged();
+            }
 
         } else if (spinnerSearch.getSelectedItem().toString().equals("Score")) {
-          dataBaseAdapter.setScoreList(dataBaseHelper.getScoresByScore(
-                  nameSearch.getText().toString(),
-                  spinnerScores.getSelectedItem().toString(),
-                  scoreSearch.getText().toString()));
-            dataBaseAdapter.notifyDataSetChanged();
+            if( scoreSearch.getText().toString().equals("")){
+                Toast.makeText(this,"Score not inserted",Toast.LENGTH_SHORT).show();
+            }else{
+                dataBaseAdapter.setScoreList(dataBaseHelper.getScoresByScore(
+                        nameSearch.getText().toString(),
+                        spinnerScores.getSelectedItem().toString(),
+                        scoreSearch.getText().toString()));
+                dataBaseAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

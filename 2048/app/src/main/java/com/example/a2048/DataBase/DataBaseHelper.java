@@ -142,12 +142,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public List<Score> getScoresByScore(String name, String sign, String value) {
         List<Score> getScoresByParam = new ArrayList<>();
-       /* if (name.equals("")) {
-            name = " ";
-        }*/
-        if (value.equals("")) {
-            value = "0";
-        }
         if(Integer.parseInt(value) > 0){
 
             String query = "SELECT * " +

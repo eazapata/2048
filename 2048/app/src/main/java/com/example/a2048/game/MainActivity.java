@@ -2,19 +2,23 @@ package com.example.a2048.game;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.a2048.DataBase.DataBaseHelper;
 import com.example.a2048.DataBase.Score;
@@ -45,17 +49,28 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        game = new Game();
-        swipeListener = new SwipeListener(this, this);
-        scoreTextView = (TextView) findViewById(R.id.score_field);
-        maxScoreTextview = (TextView) findViewById(R.id.max_score_field);
-        playerName = (TextView) findViewById(R.id.player_name_field);
-        dataBaseHelper = new DataBaseHelper(this);
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.start();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            final WindowInsetsController insetsController = getWindow().getInsetsController();
+            if (insetsController != null) {
+                insetsController.hide(WindowInsets.Type.statusBars());
+            }
+        } else {
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+            );
+        }
+        this.game = new Game();
+        this.swipeListener = new SwipeListener(this, this);
+        this.scoreTextView = (TextView) findViewById(R.id.score_field);
+        this.maxScoreTextview = (TextView) findViewById(R.id.max_score_field);
+        this.playerName = (TextView) findViewById(R.id.player_name_field);
+        this.dataBaseHelper = new DataBaseHelper(this);
+        this.chronometer = (Chronometer) findViewById(R.id.chronometer);
+        this.chronometer.start();
         setMaxScore();
-        scoreTextView.setText("0");
+        this.scoreTextView.setText("0");
         setPlayerName();
         this.undo = (Button) findViewById(R.id.undo);
         this.undo.setOnClickListener(this);
@@ -109,9 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.stop();
         chronometer.start();
-        this.scoreTextView.setText(String.valueOf(0));
+        this.scoreTextView.setText(String.valueOf(this.actualScore));
         resetImages();
         setRandomNumber();
+        copyArray();
     }
 
     @Override

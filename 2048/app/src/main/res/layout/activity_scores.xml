@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".DataBase.ScoresActivity"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:forceDarkAllowed="false">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
         android:layout_margin="20dp">
         <TextView
             android:id="@+id/searchTextView"
-            android:text="Search by: "
+            android:text="@string/search_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <Spinner
@@ -47,7 +48,9 @@
             android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/name_search"
-            android:hint="Set the name to search"
+            android:inputType="text"
+            android:lines="1"
+            android:hint="@string/set_the_name_to_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

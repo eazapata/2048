@@ -61,8 +61,6 @@
             android:textSize="15dp"
             android:layout_toRightOf="@+id/textPlayer" />
 
-
-
         <TextView
             android:id="@+id/textDuration"
             android:layout_width="wrap_content"
