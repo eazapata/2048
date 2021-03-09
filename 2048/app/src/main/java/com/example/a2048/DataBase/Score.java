@@ -1,7 +1,7 @@
 package com.example.a2048.DataBase;
 
 
-public class Score {
+public class Score{
 
     private String player;
     private int playerScore;
@@ -49,4 +49,6 @@ public class Score {
     public void setTime(String country) {
         this.time = country;
     }
+
+
 }

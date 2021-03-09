@@ -70,7 +70,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 score.setTime(String.valueOf(zoneEdit.getText()));
                 score.setPlayerScore(Integer.parseInt(scoreEdit.getText().toString()));
                 dataBaseHelper.update(score);
-                Toast.makeText(this,"Registro guardado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Score updated.",Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             default:

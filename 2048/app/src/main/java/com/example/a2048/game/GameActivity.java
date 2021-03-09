@@ -27,7 +27,7 @@ import com.example.a2048.R;
 import java.util.Random;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener, SwipeCallback, View.OnClickListener {
+public class GameActivity extends AppCompatActivity implements View.OnTouchListener, SwipeCallback, View.OnClickListener {
 
     private ImageView[][] imageViews;
     private int[][] textViewValues;
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private DataBaseHelper dataBaseHelper;
     private String player;
     private Chronometer chronometer;
+    private boolean numberSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +85,36 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         copyArray();
     }
 
+    private void askNewGame() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_new_game);
+        dialog.setCanceledOnTouchOutside(false);
+        Button yes = dialog.findViewById(R.id.yes);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame();
+                dialog.dismiss();
+            }
+        });
+        Button no = dialog.findViewById(R.id.no);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
     private void copyArray() {
         for (int i = 0; i < textViewValues.length; i++) {
             for (int j = 0; j < textViewValues[i].length; j++) {
                 previousValues[i][j] = textViewValues[i][j];
             }
         }
+
     }
 
     private ImageView[][] fillArray() {
@@ -134,9 +159,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void onClick(View v) {
         if (((Button) v).getText() == this.undo.getText()) {
             undoMovement();
-            System.out.println("Works");
         } else if (((Button) v).getText() == this.newGame.getText()) {
-            newGame();
+            askNewGame();
         }
     }
 
@@ -162,10 +186,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 System.out.println("Wrong direction");
                 break;
         }
-        if(game.isMovementSuccessful()){
-            setRandomNumber();
-        }
         this.scoreTextView.setText(String.valueOf(this.actualScore));
+        if (game.isMovementSuccessful()) {
+            setRandomNumber();
+        } else {
+            if (game.finished(textViewValues)) {
+                setGameOver();
+            }
+        }
     }
 
     @Override
@@ -182,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-    private void savePlayerData(){
+    private void savePlayerData() {
         chronometer.stop();
         Score score = new Score();
         score.setPlayer(player);
@@ -191,12 +219,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         dataBaseHelper.insertScore(score);
     }
 
-    private void setGameOver(){
+    private void setGameOver() {
 
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.game_over);
-
+        dialog.setCanceledOnTouchOutside(false);
         Button retry = dialog.findViewById(R.id.retry);
         retry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 finish();
             }
         });
-        dialog.setCancelable(true);
         dialog.show();
     }
 
@@ -236,30 +263,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void setRandomNumber() {
-        boolean play = game.checkEndgame(this.textViewValues);
-        if (play) {
-           setGameOver();
-        } else {
-            if (game.checkGrid(textViewValues)) {
-                Random random = new Random();
-                int pos1 = random.nextInt(4);
-                int pos2 = random.nextInt(4);
-                int[] numbers = {2, 2, 2, 4};
-                int value = numbers[random.nextInt(numbers.length)];
-                while (this.textViewValues[pos1][pos2] != 0) {
-                    pos1 = random.nextInt(4);
-                    pos2 = random.nextInt(4);
-
-                }
-                if (value == 2) {
-                    this.imageViews[pos1][pos2].setImageResource(R.drawable.two_img);
-                } else {
-                    this.imageViews[pos1][pos2].setImageResource(R.drawable.four);
-                }
-                this.textViewValues[pos1][pos2] = value;
-
-            }
+        Random random = new Random();
+        int pos1 = random.nextInt(4);
+        int pos2 = random.nextInt(4);
+        int[] numbers = {2, 2, 2, 4};
+        int value = numbers[random.nextInt(numbers.length)];
+        while (this.textViewValues[pos1][pos2] != 0) {
+            pos1 = random.nextInt(4);
+            pos2 = random.nextInt(4);
         }
+        if (value == 2) {
+            this.imageViews[pos1][pos2].setImageResource(R.drawable.two_img);
+        } else {
+            this.imageViews[pos1][pos2].setImageResource(R.drawable.four);
+        }
+        this.textViewValues[pos1][pos2] = value;
     }
 
     private void undoMovement() {

@@ -74,7 +74,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             while (cursor.moveToNext());
         } else {
-            //There aren't scores. No scores will be displayed
         }
         cursor.close();
         return getAllScores;
@@ -105,9 +104,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Score> getScoresByName(String name) {
-       /* if (name.equals("")) {
-            name = " ";
-        }*/
         List<Score> getScoresByParam = new ArrayList<>();
         String query = "SELECT * " +
                 "FROM " + TABLE +

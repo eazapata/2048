@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="4"
     android:background="@color/background"
-    tools:context=".game.MainActivity"
+    tools:context=".game.GameActivity"
     android:forceDarkAllowed="false">
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/brown"
+            android:textColor="@color/textColor"
             android:shadowColor="@android:color/white"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -46,7 +46,7 @@
             android:id="@+id/score"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/score" />
+            android:src="@drawable/score"/>
 
         <ImageView
             android:id="@+id/max_score"
@@ -59,7 +59,7 @@
             android:id="@+id/score_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/textColor"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
             android:gravity="center_horizontal" />
@@ -68,13 +68,13 @@
             android:id="@+id/max_score_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/textColor"
             android:gravity="center_horizontal" />
         <TextView
             android:id="@+id/player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
@@ -85,14 +85,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/textColor"
             />
         <TextView
             android:id="@+id/text_chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/splash_title_size"
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/textColor"
             />
     </GridLayout>
 
@@ -122,7 +122,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -132,7 +132,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -142,7 +142,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -152,7 +152,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -162,7 +162,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -182,7 +182,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -192,7 +192,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -202,7 +202,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -212,7 +212,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -222,7 +222,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -232,7 +232,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -242,7 +242,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -252,7 +252,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -262,7 +262,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
 
@@ -272,7 +272,7 @@
             android:layout_height="@dimen/fieldSize"
             android:layout_gravity="fill"
             android:layout_margin="@dimen/marginFields"
-            android:background="@color/brown"
+            android:background="@color/cardViewColor"
             android:gravity="center"
             android:textStyle="bold" />
     </GridLayout>
@@ -285,13 +285,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_game"
-            android:backgroundTint="@color/brown" />
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/buttonColor" />
         <Button
             android:id="@+id/undo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/undo"
-            android:backgroundTint="@color/brown"/>
+            android:textColor="@color/textColor"
+            android:backgroundTint="@color/buttonColor"/>
     </LinearLayout>
 
 </LinearLayout>

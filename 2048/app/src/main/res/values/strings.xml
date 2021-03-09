@@ -5,7 +5,7 @@
     <string name="_4">4</string>
     <string name="_8">8</string>
     <string name="android_game">Android Game</string>
-    <string name="text_footer">Version 2.0.0\nCopyright © 2011 Mamlambo\nAllRights Reserved</string>
+    <string name="text_footer">Version 1.2.0\nCopyright © 2021 eazapata\nAllRights Reserved</string>
     <string name="score">Score</string>
     <string name="max_score">Max Score</string>
     <string name="player_name">Player name:</string>
@@ -23,6 +23,14 @@
     <string name="set_the_name_to_search">Set the name</string>
     <string name="search_by">Search by:</string>
     <string name="player_id">Player ID:</string>
+    <string name="name">Name</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="new_game_question">Do you want to start a new game?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="remove_score_question">Do yo want to remove this score</string>
+    <string name="game_over">GAME OVER</string>
+    <string name="sort_score">Sort score:</string>
     <string-array name="search_options">
         <item>Name</item>
         <item>Score</item>

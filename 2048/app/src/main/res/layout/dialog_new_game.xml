@@ -10,35 +10,36 @@
     android:forceDarkAllowed="false">
 
     <TextView
-        android:id="@+id/Game_over"
-        android:text="@string/game_over"
+        android:id="@+id/new_game_question"
+        android:text="@string/new_game_question"
         android:textSize="@dimen/dialog_text_size"
         android:textColor="@color/textColor"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/retry"
+            android:id="@+id/yes"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="16sp"
-            android:text="@string/retry"
+            android:text="@string/yes"
             android:textStyle="bold"
             android:textColor="@color/textColor"
             android:backgroundTint="@color/buttonColor"/>
 
         <Button
-            android:id="@+id/exit"
+            android:id="@+id/no"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="16sp"
-            android:text="Exit"
+            android:text="@string/no"
             android:textStyle="bold"
             android:textColor="@color/textColor"
             android:backgroundTint="@color/buttonColor"/>

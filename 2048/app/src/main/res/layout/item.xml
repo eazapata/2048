@@ -8,7 +8,7 @@
         android:id="@+id/listText"
         android:gravity="center"
         android:textSize="20dp"
-        android:textColor="@color/brown"
+        android:textColor="@color/textColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shadowColor="@android:color/white"

@@ -23,7 +23,7 @@
             android:shadowDy="0"
             android:shadowRadius="20"
             android:text="@string/_2048"
-            android:textColor="@color/brown"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/splash_title_size" />
 
         <ImageView
@@ -38,7 +38,7 @@
             android:gravity="center"
             android:text="@string/edit_score"
             android:textAlignment="center"
-            android:textColor="@color/brown"
+            android:textColor="@color/textColor"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -52,12 +52,15 @@
             android:id="@+id/textview_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
             android:text="@string/player_id" />
 
         <EditText
             android:id="@+id/player_id_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:gravity="center_horizontal"
             android:inputType="none" />
     </LinearLayout>
 
@@ -70,13 +73,17 @@
             android:id="@+id/textview_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
             android:text="@string/player_name" />
 
         <EditText
             android:id="@+id/player_name_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
             android:hint="@string/player_name"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
             android:inputType="text" />
     </LinearLayout>
 
@@ -90,13 +97,17 @@
             android:id="@+id/textview_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time: " />
+            android:textColor="@color/textColor"
+            android:text="@string/time" />
 
         <EditText
             android:id="@+id/time_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="bold"
             android:hint="@string/time"
+            android:gravity="center_horizontal"
             android:inputType="time" />
     </LinearLayout>
 
@@ -110,18 +121,23 @@
             android:id="@+id/textview_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
             android:text="Score: " />
 
         <EditText
             android:id="@+id/player_score_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:textColor="@color/textColor"
+            android:inputType="none"
+            android:gravity="center_horizontal" />
     </LinearLayout>
 
     <Button
         android:id="@+id/save_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:backgroundTint="#E0DAC1"
         android:text="@string/save" />
 </LinearLayout>

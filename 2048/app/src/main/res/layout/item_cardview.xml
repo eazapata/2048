@@ -7,7 +7,7 @@
     android:layout_marginTop="0dp"
     android:layout_marginBottom="20dp"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="#fed5b9"
+    app:cardBackgroundColor="@color/buttonColor"
     app:cardUseCompatPadding="true"
     tools:ignore="MissingClass"
     android:forceDarkAllowed="false">
@@ -15,8 +15,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:background="#fed5b9">
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/textScore"
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="Score:"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -35,7 +34,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/textScore"
             android:text="500"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="15dp"
             android:layout_toRightOf="@+id/textScore" />
 
@@ -45,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/score_cardview"
             android:text="Username:"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -57,7 +56,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/textPlayer"
             android:text="500"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="15dp"
             android:layout_toRightOf="@+id/textPlayer" />
 
@@ -67,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/player_cardview"
             android:text="Duration:"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -77,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/textDuration"
             android:layout_below="@id/player_cardview"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColor"
             android:textSize="15dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/textDuration" />

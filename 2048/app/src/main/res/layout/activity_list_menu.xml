@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".game.MainActivity"
+    tools:context=".game.GameActivity"
     android:background="@color/background"
     android:forceDarkAllowed="false">
 
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/brown"
+        android:textColor="@color/textColor"
         android:layout_marginBottom="50dp"
         android:shadowColor="@android:color/white"
         android:shadowDx="0"

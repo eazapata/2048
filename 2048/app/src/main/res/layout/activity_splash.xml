@@ -15,7 +15,7 @@
         android:layout_margin="@dimen/general_margin"
         android:gravity="center"
         android:text="@string/android_game"
-        android:textColor="@color/brownGrid"
+        android:textColor="@color/textColor"
         android:textSize="@dimen/splash_title_size" />
 
     <TableLayout

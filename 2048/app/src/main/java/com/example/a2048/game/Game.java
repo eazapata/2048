@@ -146,34 +146,22 @@ public class Game {
         return score;
     }
 
-    public boolean checkGrid(int[][] values) {
-        boolean freeSpace = false;
-        for (int x = 0; x < 4; x++) {
-            for (int y = 0; y < 4; y++) {
-                if (values[x][y] == 0) {
-                    freeSpace = true;
+    public boolean finished(int[][] values) {
+        boolean finished = true;
+        for (int i = 1; i < values.length - 1; i++) {
+            for (int j = 1; j < values[i].length - 1; j++) {
+                if ((values[i - 1][j] == values[i][j]) ||
+                        (values[i + 1][j] == values[i][j]) ||
+                        (values[i][j - 1] == values[i][j]) ||
+                        (values[i][j + 1] == values[i][j]) ||
+                        (values[i - 1][j - 1] == values[i][j - 1]) ||
+                        (values[i + 1][j + 1] == values[i][j + 1])) {
+                    finished = false;
+                    break;
                 }
             }
         }
-        return freeSpace;
-    }
-
-    public boolean checkEndgame(int[][] values) {
-        boolean endGame = true;
-
-        if (endGame) {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if ((i > 0 && values[i - 1][j] == values[i][j]) ||
-                            (i < 3 && values[i + 1][j] == values[i][j]) ||
-                            (j > 0 && values[i][j - 1] == values[i][j]) ||
-                            (j < 3 && values[i][j + 1] == values[i][j])) {
-                        endGame = false;
-                    }
-                }
-            }
-        }
-        return endGame;
+        return finished;
     }
 
     public void setImage(ImageView[][] imageViews, int[][] imageViewsValues) {

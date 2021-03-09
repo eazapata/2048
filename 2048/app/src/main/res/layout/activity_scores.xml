@@ -3,89 +3,140 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataBase.ScoresActivity"
-    android:orientation="vertical"
     android:background="@color/background"
-    android:forceDarkAllowed="false">
+    android:forceDarkAllowed="false"
+    android:orientation="vertical"
+    tools:context=".DataBase.ScoresActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
         <TextView
-            android:text="2048"
-            android:textSize="@dimen/splash_title_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/brown"
             android:shadowColor="@android:color/white"
             android:shadowDx="0"
             android:shadowDy="0"
-            android:shadowRadius="20"/>
+            android:shadowRadius="20"
+            android:text="2048"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/splash_title_size" />
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:src="@drawable/captura2048"/>
+            android:src="@drawable/captura2048" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_margin="20dp"
         android:gravity="center"
-        android:layout_margin="20dp">
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/searchTextView"
-            android:text="@string/search_by"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/search_by"
+            android:textColor="@color/textColor"/>
+
         <Spinner
             android:id="@+id/spinner_search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:popupBackground="@color/background"/>
+
         <EditText
             android:id="@+id/name_search"
-            android:inputType="text"
-            android:lines="1"
-            android:hint="@string/set_the_name_to_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="@string/set_the_name_to_search"
+            android:textColor="@color/textColor"
+            android:inputType="text"
+            android:lines="1" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/score_layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_margin="20dp"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/search_score"
-            android:text="Sort by: "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:text="@string/sort_score" />
+
         <Spinner
             android:id="@+id/spinner_score_options"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:popupBackground="@color/background"/>
+
         <EditText
             android:id="@+id/score_search"
-            android:hint="Set the score to search"
             android:layout_width="match_parent"
-            android:inputType="number"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="Set the score to search"
+            android:inputType="number" />
     </LinearLayout>
-
+    <Button
+        android:id="@+id/show_scores_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="search"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/textColor"
+        android:text="Show all scores" />
     <Button
         android:id="@+id/seach_scores_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search"
-        android:onClick="search"/>
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/textColor"
+        android:onClick="search"
+        android:text="Search" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/sort_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"/>
+
+        <Button
+            android:id="@+id/sort_by_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonColor"
+            android:textColor="@color/textColor"
+            android:text="@string/name"/>
+
+        <Button
+            android:id="@+id/sort_by_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonColor"
+            android:textColor="@color/textColor"
+            android:text="@string/score"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_score"

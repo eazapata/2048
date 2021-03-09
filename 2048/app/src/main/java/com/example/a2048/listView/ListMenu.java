@@ -1,7 +1,6 @@
 package com.example.a2048.listView;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,15 +14,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a2048.DataBase.Score;
 import com.example.a2048.DataBase.ScoresActivity;
 import com.example.a2048.R;
-import com.example.a2048.game.MainActivity;
+import com.example.a2048.game.GameActivity;
 
 import java.util.ArrayList;
 
@@ -105,7 +101,7 @@ public class ListMenu extends AppCompatActivity implements AdapterView.OnItemCli
 
     private void startGame(String playerName) {
         Intent intent;
-        intent = new Intent(this, MainActivity.class);
+        intent = new Intent(this, GameActivity.class);
         intent.putExtra("PLAYER KEY", playerName);
         startActivity(intent);
     }

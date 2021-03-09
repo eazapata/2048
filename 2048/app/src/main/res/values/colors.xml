@@ -3,8 +3,11 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="background">#E9EBD7</color>
-    <color name="brownGrid">#A88C60</color>
+    <color name="background">#EFE8CD</color>
+    <color name="brownGrid">#A19C8A</color>
     <color name="brown">#B8A991</color>
     <color name="black">#000000</color>
+    <color name="textColor">#A19C8A</color>
+    <color name="buttonColor">#E0DAC1</color>
+    <color name="cardViewColor">#C7C1AB</color>
 </resources>
