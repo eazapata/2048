@@ -81,7 +81,6 @@ public class ScoresActivity extends AppCompatActivity implements AdapterView.OnI
         recyclerView = (RecyclerView) findViewById(R.id.recycler_score);
 
         this.dataBaseAdapter = new DataBaseAdapter(this, dataBaseHelper);
-        // loadData();
 
         this.recyclerView.setAdapter(dataBaseAdapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));

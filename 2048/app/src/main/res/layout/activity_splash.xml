@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".game.SplashActivity"
+    tools:context=".listView.SplashActivity"
     android:forceDarkAllowed="false">
 
     <TextView

@@ -36,7 +36,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -67,7 +68,8 @@
         android:id="@+id/score_layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -91,22 +93,30 @@
             android:hint="Set the score to search"
             android:inputType="number" />
     </LinearLayout>
-    <Button
-        android:id="@+id/show_scores_activity"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="search"
-        android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/textColor"
-        android:text="Show all scores" />
-    <Button
-        android:id="@+id/seach_scores_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/textColor"
-        android:onClick="search"
-        android:text="Search" />
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/show_scores_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="search"
+            android:backgroundTint="@color/buttonColor"
+            android:textColor="@color/textColor"
+            android:text="Show all scores" />
+        <Button
+            android:id="@+id/seach_scores_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonColor"
+            android:textColor="@color/textColor"
+            android:onClick="search"
+            android:text="Search" />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

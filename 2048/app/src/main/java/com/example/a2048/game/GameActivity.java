@@ -30,7 +30,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity implements View.OnTouchListener, SwipeCallback, View.OnClickListener {
 
     private ImageView[][] imageViews;
-    private int[][] textViewValues;
+    private int[][] values;
     private GridLayout grid;
     private SwipeListener swipeListener;
     private TextView scoreTextView, maxScoreTextview;
@@ -39,12 +39,11 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private int[][] previousValues = new int[4][4];
     private Button undo;
     private Button newGame;
-    private Game game;
+    private GameLogic game;
     private TextView playerName;
     private DataBaseHelper dataBaseHelper;
     private String player;
     private Chronometer chronometer;
-    private boolean numberSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
                     WindowManager.LayoutParams.FLAG_FULLSCREEN
             );
         }
-        this.game = new Game();
+        this.game = new GameLogic();
         this.swipeListener = new SwipeListener(this, this);
         this.scoreTextView = (TextView) findViewById(R.id.score_field);
         this.maxScoreTextview = (TextView) findViewById(R.id.max_score_field);
@@ -77,7 +76,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         this.undo.setOnClickListener(this);
         this.newGame = (Button) findViewById(R.id.new_game);
         this.newGame.setOnClickListener(this);
-        this.textViewValues = new int[4][4];
+        this.values = new int[4][4];
         this.imageViews = fillArray();
         this.grid = (GridLayout) findViewById(R.id.grid);
         this.grid.setOnTouchListener(this);
@@ -109,9 +108,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void copyArray() {
-        for (int i = 0; i < textViewValues.length; i++) {
-            for (int j = 0; j < textViewValues[i].length; j++) {
-                previousValues[i][j] = textViewValues[i][j];
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
+                previousValues[i][j] = values[i][j];
             }
         }
 
@@ -143,8 +142,8 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void newGame() {
-        this.textViewValues = null;
-        this.textViewValues = new int[4][4];
+        this.values = null;
+        this.values = new int[4][4];
         this.actualScore = 0;
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.stop();
@@ -164,23 +163,22 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-
     @Override
     public void onSwipe(Direction direction) {
         copyArray();
         this.previousScore = this.actualScore;
         switch (direction) {
             case UP:
-                this.actualScore = game.up(imageViews, textViewValues, this.actualScore);
+                this.actualScore = game.up(imageViews, values, this.actualScore);
                 break;
             case DOWN:
-                this.actualScore = game.down(imageViews, textViewValues, this.actualScore);
+                this.actualScore = game.down(imageViews, values, this.actualScore);
                 break;
             case LEFT:
-                this.actualScore = game.left(imageViews, textViewValues, this.actualScore);
+                this.actualScore = game.left(imageViews, values, this.actualScore);
                 break;
             case RIGHT:
-                this.actualScore = game.right(imageViews, textViewValues, this.actualScore);
+                this.actualScore = game.right(imageViews, values, this.actualScore);
                 break;
             default:
                 System.out.println("Wrong direction");
@@ -190,7 +188,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         if (game.isMovementSuccessful()) {
             setRandomNumber();
         } else {
-            if (game.finished(textViewValues)) {
+            if (game.finished(values)) {
                 setGameOver();
             }
         }
@@ -268,7 +266,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         int pos2 = random.nextInt(4);
         int[] numbers = {2, 2, 2, 4};
         int value = numbers[random.nextInt(numbers.length)];
-        while (this.textViewValues[pos1][pos2] != 0) {
+        while (this.values[pos1][pos2] != 0) {
             pos1 = random.nextInt(4);
             pos2 = random.nextInt(4);
         }
@@ -277,19 +275,19 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         } else {
             this.imageViews[pos1][pos2].setImageResource(R.drawable.four);
         }
-        this.textViewValues[pos1][pos2] = value;
+        this.values[pos1][pos2] = value;
     }
 
     private void undoMovement() {
         resetImages();
         this.actualScore = this.previousScore;
         scoreTextView.setText(String.valueOf(this.previousScore));
-        for (int i = 0; i < textViewValues.length; i++) {
-            for (int j = 0; j < textViewValues[i].length; j++) {
-                textViewValues[i][j] = previousValues[i][j];
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
+                values[i][j] = previousValues[i][j];
             }
         }
-        game.setImage(imageViews, textViewValues);
+        game.setImage(imageViews, values);
 
     }
 

@@ -7,7 +7,6 @@
     <string name="android_game">Android Game</string>
     <string name="text_footer">Version 1.2.0\nCopyright © 2021 eazapata\nAllRights Reserved</string>
     <string name="score">Score</string>
-    <string name="max_score">Max Score</string>
     <string name="player_name">Player name:</string>
     <string name="new_game">New game</string>
     <string name="undo">Undo</string>
@@ -31,6 +30,7 @@
     <string name="remove_score_question">Do yo want to remove this score</string>
     <string name="game_over">GAME OVER</string>
     <string name="sort_score">Sort score:</string>
+    <string name="top_score">TOP SCORE</string>
     <string-array name="search_options">
         <item>Name</item>
         <item>Score</item>

@@ -51,6 +51,12 @@ public class ListMenu extends AppCompatActivity implements AdapterView.OnItemCli
         listView.setAdapter(this.adapter);
     }
 
+    private void getActivities() {
+        this.activities = new ArrayList<>();
+        this.activities.add(new Item("Play"));
+        this.activities.add(new Item("Manage Scores"));
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -72,12 +78,6 @@ public class ListMenu extends AppCompatActivity implements AdapterView.OnItemCli
             default:
                 Log.d("Switch fail", "Activity not found.");
         }
-    }
-
-    private void getActivities() {
-        this.activities = new ArrayList<>();
-        this.activities.add(new Item("Play"));
-        this.activities.add(new Item("Manage Scores"));
     }
 
     private void setPlayerName(){

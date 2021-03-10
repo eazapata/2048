@@ -20,11 +20,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static String KEY_ID = "id";
     private static String PLAYER_NAME = "playerName";
     private static String SCORE = "score";
-    private static String COUNTRY = "country";
+    private static String TIME = "time";
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY, " +
                     PLAYER_NAME + " TEXT," +
+                    TIME + " TEXT," +
                     SCORE + " INTEGER);";
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
@@ -67,9 +68,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 int scoreId = cursor.getInt(0);
                 String username = cursor.getString(1);
-                String country = cursor.getString(2);
+                String time = cursor.getString(2);
                 Integer score = cursor.getInt(3);
-                Score newScore = new Score(scoreId, username, score, country);
+                Score newScore = new Score(scoreId, username, score, time);
                 getAllScores.add(newScore);
             }
             while (cursor.moveToNext());
@@ -118,9 +119,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 do {
                     int scoreId = cursor.getInt(0);
                     String username = cursor.getString(1);
-                    String country = cursor.getString(2);
+                    String time = cursor.getString(2);
                     Integer score = cursor.getInt(3);
-                    Score newScore = new Score(scoreId, username, score, country);
+                    Score newScore = new Score(scoreId, username, score, time);
                     getScoresByParam.add(newScore);
                 }
                 while (cursor.moveToNext());
@@ -154,9 +155,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     do {
                         int scoreId = cursor.getInt(0);
                         String username = cursor.getString(1);
-                        String country = cursor.getString(2);
+                        String time = cursor.getString(2);
                         Integer score = cursor.getInt(3);
-                        Score newScore = new Score(scoreId, username, score, country);
+                        Score newScore = new Score(scoreId, username, score, time);
                         getScoresByParam.add(newScore);
                     }
                     while (cursor.moveToNext());
@@ -179,7 +180,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         ContentValues values = new ContentValues();
         values.put(PLAYER_NAME, score.getPlayer());
-        values.put(COUNTRY, score.getTime());
+        values.put(TIME, score.getTime());
         values.put(SCORE, score.getPlayerScore());
         mWritableDB.insert(TABLE, null, values);
 
@@ -194,7 +195,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_ID, score.getId());
             values.put(PLAYER_NAME, score.getPlayer());
-            values.put(COUNTRY, score.getTime());
+            values.put(TIME, score.getTime());
             values.put(SCORE, score.getPlayerScore());
             mNumberOfRowsUpdated = mWritableDB.update(TABLE, values, KEY_ID + " = ?",
                     new String[]{String.valueOf(score.getId())});

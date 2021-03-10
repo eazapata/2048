@@ -46,8 +46,8 @@ public class Score{
         return time;
     }
 
-    public void setTime(String country) {
-        this.time = country;
+    public void setTime(String time) {
+        this.time = time;
     }
 
 

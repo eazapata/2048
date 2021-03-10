@@ -79,7 +79,7 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
                 intent.putExtra("KEY ID", score.getId());
                 intent.putExtra("PLAYER SCORE", score.getPlayerScore());
                 intent.putExtra("PLAYER NAME", score.getPlayer());
-                intent.putExtra("PLAYER COUNTRY", score.getTime());
+                intent.putExtra("PLAYER TIME", score.getTime());
                 context.startActivity(intent);
 
             }
@@ -118,6 +118,5 @@ public class DataBaseAdapter extends RecyclerView.Adapter<DataBaseAdapter.scoreV
     public int getItemCount() {
         return scoreList.size();
     }
-
 
 }

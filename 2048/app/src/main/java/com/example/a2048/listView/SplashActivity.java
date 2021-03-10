@@ -1,4 +1,4 @@
-package com.example.a2048.game;
+package com.example.a2048.listView;
 
 import android.content.Intent;
 import android.os.Build;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a2048.R;
-import com.example.a2048.listView.ListMenu;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -37,6 +36,22 @@ public class SplashActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN
             );
         }
+        startAnimation();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        TableLayout table = (TableLayout) findViewById(R.id.table);
+        for (int i = 0; i < table.getChildCount(); i++) {
+            TableRow row = (TableRow) table.getChildAt(i);
+            row.clearAnimation();
+        }
+    }
+
+    private void startAnimation(){
+
         TextView title = (TextView) findViewById(R.id.appTitle);
         ImageView logo = (ImageView) findViewById(R.id.logo);
         Animation fade1 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -67,17 +82,6 @@ public class SplashActivity extends AppCompatActivity {
         for (int i = 0; i < table.getChildCount(); i++) {
             TableRow row = (TableRow) table.getChildAt(i);
             row.setLayoutAnimation(controller);
-        }
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        TableLayout table = (TableLayout) findViewById(R.id.table);
-        for (int i = 0; i < table.getChildCount(); i++) {
-            TableRow row = (TableRow) table.getChildAt(i);
-            row.clearAnimation();
         }
     }
 }

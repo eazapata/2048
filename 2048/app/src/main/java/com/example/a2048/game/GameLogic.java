@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import com.example.a2048.R;
 
 
-public class Game {
+public class GameLogic {
     private boolean movementSuccessful;
 
     public boolean isMovementSuccessful() {
@@ -127,7 +127,6 @@ public class Game {
         return score;
     }
 
-
     public int right(ImageView[][] imageViews, int[][] textViewValues, int score) {
         this.movementSuccessful = false;
         moveRight(imageViews, textViewValues);
@@ -148,16 +147,26 @@ public class Game {
 
     public boolean finished(int[][] values) {
         boolean finished = true;
-        for (int i = 1; i < values.length - 1; i++) {
-            for (int j = 1; j < values[i].length - 1; j++) {
-                if ((values[i - 1][j] == values[i][j]) ||
-                        (values[i + 1][j] == values[i][j]) ||
-                        (values[i][j - 1] == values[i][j]) ||
-                        (values[i][j + 1] == values[i][j]) ||
-                        (values[i - 1][j - 1] == values[i][j - 1]) ||
-                        (values[i + 1][j + 1] == values[i][j + 1])) {
+        for (int i = 0; i < values.length ; i++) {
+            for (int j = 0; j < values[i].length ; j++) {
+                if(values[i][j] == 0){
                     finished = false;
                     break;
+                }
+            }
+        }
+        if(finished){
+            for (int i = 1; i < values.length - 1; i++) {
+                for (int j = 1; j < values[i].length - 1; j++) {
+                    if ((values[i - 1][j] == values[i][j]) ||
+                            (values[i + 1][j] == values[i][j]) ||
+                            (values[i][j - 1] == values[i][j]) ||
+                            (values[i][j + 1] == values[i][j]) ||
+                            (values[i - 1][j - 1] == values[i][j - 1]) ||
+                            (values[i + 1][j + 1] == values[i][j + 1])) {
+                        finished = false;
+                        break;
+                    }
                 }
             }
         }

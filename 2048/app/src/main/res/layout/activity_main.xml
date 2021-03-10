@@ -42,25 +42,27 @@
         android:rowCount="4"
         android:layout_above="@+id/grid">
 
-        <ImageView
+        <TextView
             android:id="@+id/score"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/score"/>
+            android:text="@string/score"
+            android:src="@drawable/score"
+            android:layout_marginLeft="@dimen/general_margin"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/max_score"
             android:layout_width="100dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:src="@drawable/topscore"/>
+            android:text="@string/top_score"/>
 
         <TextView
             android:id="@+id/score_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/general_margin"
             android:layout_marginRight="@dimen/splash_title_size"
             android:gravity="center_horizontal" />
 
@@ -77,7 +79,7 @@
             android:textColor="@color/textColor"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/general_margin"
             android:layout_marginRight="@dimen/splash_title_size"
             android:text="@string/player_name"/>
         <TextView
@@ -94,7 +96,7 @@
             android:text="@string/time"
             android:textColor="@color/textColor"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/general_margin"
             android:layout_marginRight="@dimen/splash_title_size"
             />
         <Chronometer
@@ -102,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time"
+            android:fontFamily="@font/coiny"
             android:textColor="@color/textColor"
             />
     </GridLayout>

@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:shadowColor="@android:color/white"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -27,8 +27,8 @@
             android:textSize="@dimen/splash_title_size" />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@drawable/captura2048" />
 
@@ -138,6 +138,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
-        android:backgroundTint="#E0DAC1"
+        android:backgroundTint="@color/buttonColor"
         android:text="@string/save" />
 </LinearLayout>
