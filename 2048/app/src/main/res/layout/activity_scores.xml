@@ -22,7 +22,7 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="20"
-            android:text="2048"
+            android:text="@string/_2048"
             android:textColor="@color/brown"
             android:textSize="@dimen/splash_title_size" />
 
@@ -90,7 +90,7 @@
             android:id="@+id/score_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Set the score to search"
+            android:hint="@string/set_the_score"
             android:inputType="number" />
     </LinearLayout>
     <LinearLayout
@@ -103,17 +103,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="search"
-            android:backgroundTint="@color/buttonColor"
-            android:textColor="@color/textColor"
-            android:text="Show all scores" />
+            android:backgroundTint="@color/textColor"
+            android:textColor="@color/buttonColor"
+            android:text="@string/show_all_scores" />
         <Button
             android:id="@+id/seach_scores_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/buttonColor"
-            android:textColor="@color/textColor"
+            android:backgroundTint="@color/textColor"
+            android:textColor="@color/buttonColor"
             android:onClick="search"
-            android:text="Search" />
+            android:text="@string/search" />
     </LinearLayout>
 
 
@@ -134,16 +134,16 @@
             android:id="@+id/sort_by_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/buttonColor"
-            android:textColor="@color/textColor"
+            android:backgroundTint="@color/textColor"
+            android:textColor="@color/buttonColor"
             android:text="@string/name"/>
 
         <Button
             android:id="@+id/sort_by_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/buttonColor"
-            android:textColor="@color/textColor"
+            android:backgroundTint="@color/textColor"
+            android:textColor="@color/buttonColor"
             android:text="@string/score"/>
 
     </LinearLayout>

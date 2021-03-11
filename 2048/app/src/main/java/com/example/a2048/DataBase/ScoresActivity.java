@@ -181,6 +181,11 @@ public class ScoresActivity extends AppCompatActivity implements AdapterView.OnI
         this.dataBaseAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Method that do a query to the database and set this information in to the arrayList of the
+     * adapter
+     * @param v view that calls the method
+     */
     public void search(View v) {
 
         if (spinnerSearch.getSelectedItem().toString().equals("Name")) {
@@ -201,6 +206,9 @@ public class ScoresActivity extends AppCompatActivity implements AdapterView.OnI
                         scoreSearch.getText().toString()));
                 this.dataBaseAdapter.notifyDataSetChanged();
             }
+        }
+        if(this.dataBaseAdapter.getScoreList().size() < 1){
+            Toast.makeText(this,"No results for this search",Toast.LENGTH_SHORT).show();
         }
     }
 

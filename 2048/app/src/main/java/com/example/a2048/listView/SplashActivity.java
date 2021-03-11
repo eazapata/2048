@@ -50,6 +50,9 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to start the animation
+     */
     private void startAnimation(){
 
         TextView title = (TextView) findViewById(R.id.appTitle);

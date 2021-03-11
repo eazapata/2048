@@ -42,9 +42,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+        onCreate(db);
     }
 
+    /**
+     * Method to delete a score
+     * @param score score to delete
+     */
     public void delete(Score score) {
         try {
             if (mWritableDB == null) {
@@ -56,6 +61,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Method to get all the scores
+     * @return list of scores
+     */
     public List<Score> getAllScores() {
         List<Score> getAllScores = new ArrayList<>();
 
@@ -80,6 +89,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return getAllScores;
     }
 
+    /**
+     * Method to get the top score reached
+     * @return list of scores
+     */
     public int getMaxScore() {
         String query = "SELECT * FROM " + TABLE + " order by " + SCORE + " desc";
         Cursor cursor = null;
@@ -104,6 +117,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Method to get a list of scores with a determinate name
+     * order by name
+     * @param name name to search
+     * @return list of scores
+     */
     public List<Score> getScoresByName(String name) {
         List<Score> getScoresByParam = new ArrayList<>();
         String query = "SELECT * " +
@@ -137,6 +156,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Method to get a list of scores greater/lower/equals than a score value
+     * @param name name to search (this field could be null)
+     * @param sign greater/lower/equals from the spinner
+     * @param value value to search
+     * @return list of scores
+     */
     public List<Score> getScoresByScore(String name, String sign, String value) {
         List<Score> getScoresByParam = new ArrayList<>();
         if(Integer.parseInt(value) > 0){
@@ -174,6 +200,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return  getScoresByParam;
     }
 
+    /**
+     * Method to insert a score
+     * @param score score to insert
+     */
     public void insertScore(Score score) {
         if (mWritableDB == null) {
             mWritableDB = getWritableDatabase();
@@ -186,6 +216,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Method to update a score
+     * @param score score to update
+     * @return
+     */
     public int update(Score score) {
         int mNumberOfRowsUpdated = -1;
         try {

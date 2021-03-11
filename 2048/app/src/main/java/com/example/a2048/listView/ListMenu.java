@@ -51,6 +51,9 @@ public class ListMenu extends AppCompatActivity implements AdapterView.OnItemCli
         listView.setAdapter(this.adapter);
     }
 
+    /**
+     * Method to add the activities to the arrayList
+     */
     private void getActivities() {
         this.activities = new ArrayList<>();
         this.activities.add(new Item("Play"));
@@ -80,6 +83,9 @@ public class ListMenu extends AppCompatActivity implements AdapterView.OnItemCli
         }
     }
 
+    /**
+     * Method to create a custom dialog to get a player name, this name will be send to gameActivity
+     */
     private void setPlayerName(){
 
         final Dialog dialog = new Dialog(this);
@@ -99,6 +105,10 @@ public class ListMenu extends AppCompatActivity implements AdapterView.OnItemCli
         dialog.show();
     }
 
+    /**
+     * Method to start the game getting the player name as an attribute
+     * @param playerName
+     */
     private void startGame(String playerName) {
         Intent intent;
         intent = new Intent(this, GameActivity.class);

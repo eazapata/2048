@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:text="2048"
+            android:text="@string/_2048"
             android:textSize="@dimen/splash_title_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -288,15 +288,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_game"
-            android:textColor="@color/textColor"
-            android:backgroundTint="@color/buttonColor" />
+            android:textColor="@color/buttonColor"
+            android:backgroundTint="@color/textColor" />
         <Button
             android:id="@+id/undo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/undo"
-            android:textColor="@color/textColor"
-            android:backgroundTint="@color/buttonColor"/>
+            android:textColor="@color/buttonColor"
+            android:backgroundTint="@color/textColor"/>
     </LinearLayout>
 
 </LinearLayout>

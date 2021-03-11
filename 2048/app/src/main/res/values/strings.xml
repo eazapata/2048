@@ -31,6 +31,13 @@
     <string name="game_over">GAME OVER</string>
     <string name="sort_score">Sort score:</string>
     <string name="top_score">TOP SCORE</string>
+    <string name="set_the_score">Set the score</string>
+    <string name="show_all_scores">Show all scores</string>
+    <string name="search">Search</string>
+    <string name="score_edit">Score:</string>
+    <string name="exit">Exit</string>
+    <string name="score_cardview">Score:</string>
+    <string name="username">Username:</string>
     <string-array name="search_options">
         <item>Name</item>
         <item>Score</item>

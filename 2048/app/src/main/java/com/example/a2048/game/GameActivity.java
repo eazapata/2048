@@ -2,6 +2,8 @@ package com.example.a2048.game;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.a2048.DataBase.DataBaseHelper;
 import com.example.a2048.DataBase.Score;
@@ -44,11 +47,12 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private DataBaseHelper dataBaseHelper;
     private String player;
     private Chronometer chronometer;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             final WindowInsetsController insetsController = getWindow().getInsetsController();
@@ -61,6 +65,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
                     WindowManager.LayoutParams.FLAG_FULLSCREEN
             );
         }
+        this.mediaPlayer = MediaPlayer.create(this,R.raw.music);
+        this.mediaPlayer.setLooping(true);
+        this.mediaPlayer.start();
         this.game = new GameLogic();
         this.swipeListener = new SwipeListener(this, this);
         this.scoreTextView = (TextView) findViewById(R.id.score_field);
@@ -68,6 +75,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         this.playerName = (TextView) findViewById(R.id.player_name_field);
         this.dataBaseHelper = new DataBaseHelper(this);
         this.chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setTypeface(ResourcesCompat.getFont(this, R.font.coiny));
         this.chronometer.start();
         setMaxScore();
         this.scoreTextView.setText("0");
@@ -84,6 +92,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         copyArray();
     }
 
+    /**
+     * Method to ask the player if he wants to starts a new game with a custom dialog
+     */
     private void askNewGame() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -107,6 +118,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         dialog.show();
     }
 
+    /**
+     * Method to set the backup array for the undo button
+     */
     private void copyArray() {
         for (int i = 0; i < values.length; i++) {
             for (int j = 0; j < values[i].length; j++) {
@@ -116,6 +130,11 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     }
 
+    /**
+     * Method to fill the array of imageViews
+     *
+     * @return an array with the imageviews
+     */
     private ImageView[][] fillArray() {
         ImageView textView1 = (ImageView) findViewById(R.id.one);
         ImageView textView2 = (ImageView) findViewById(R.id.two);
@@ -141,6 +160,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         return arrayText;
     }
 
+    /**
+     * Method that reset the content of the activity
+     */
     private void newGame() {
         this.values = null;
         this.values = new int[4][4];
@@ -200,6 +222,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         return true;
     }
 
+    /**
+     * Method to set all the imageViews value to null.
+     */
     private void resetImages() {
         for (int i = 0; i < imageViews.length; i++) {
             for (int j = 0; j < imageViews[i].length; j++) {
@@ -208,6 +233,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
+    /**
+     * Method to save the score with the player info
+     */
     private void savePlayerData() {
         chronometer.stop();
         Score score = new Score();
@@ -217,6 +245,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         dataBaseHelper.insertScore(score);
     }
 
+    /**
+     * Method to create a dialog for the game over.
+     */
     private void setGameOver() {
 
         final Dialog dialog = new Dialog(this);
@@ -244,11 +275,17 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         dialog.show();
     }
 
+    /**
+     * Method to set the top score reached
+     */
     private void setMaxScore() {
         int score = dataBaseHelper.getMaxScore();
         maxScoreTextview.setText(String.valueOf(score));
     }
 
+    /**
+     * Method to set the player name in the textview
+     */
     private void setPlayerName() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -260,6 +297,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     }
 
+    /**
+     * Method to set a new number on the grid
+     */
     public void setRandomNumber() {
         Random random = new Random();
         int pos1 = random.nextInt(4);
@@ -278,6 +318,9 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         this.values[pos1][pos2] = value;
     }
 
+    /**
+     * Method to undo a movement
+     */
     private void undoMovement() {
         resetImages();
         this.actualScore = this.previousScore;
@@ -288,7 +331,24 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             }
         }
         game.setImage(imageViews, values);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.mediaPlayer.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.mediaPlayer.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.mediaPlayer.pause();
     }
 
 }

@@ -30,8 +30,8 @@
             android:textSize="16sp"
             android:text="@string/yes"
             android:textStyle="bold"
-            android:textColor="@color/textColor"
-            android:backgroundTint="@color/buttonColor"/>
+            android:textColor="@color/buttonColor"
+            android:backgroundTint="@color/textColor"/>
 
         <Button
             android:id="@+id/no"
@@ -41,8 +41,8 @@
             android:textSize="16sp"
             android:text="@string/no"
             android:textStyle="bold"
-            android:textColor="@color/textColor"
-            android:backgroundTint="@color/buttonColor"/>
+            android:textColor="@color/buttonColor"
+            android:backgroundTint="@color/textColor"/>
 
 
     </LinearLayout>

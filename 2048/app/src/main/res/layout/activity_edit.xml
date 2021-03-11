@@ -53,7 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:text="@string/player_id" />
+            android:text="@string/player_id"
+            android:textStyle="normal"/>
 
         <EditText
             android:id="@+id/player_id_edit"
@@ -61,7 +62,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
             android:gravity="center_horizontal"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textStyle="normal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -122,7 +124,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:text="Score: " />
+            android:text="@string/score_edit"
+            android:textStyle="normal"/>
 
         <EditText
             android:id="@+id/player_score_edit"
@@ -130,14 +133,15 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
             android:inputType="none"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:textStyle="normal"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/save_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/buttonColor"
+        android:backgroundTint="@color/textColor"
         android:text="@string/save" />
 </LinearLayout>

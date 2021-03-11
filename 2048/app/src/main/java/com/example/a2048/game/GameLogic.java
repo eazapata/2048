@@ -12,6 +12,7 @@ public class GameLogic {
         return movementSuccessful;
     }
 
+    // METHODS FOR MOVE THE NUMBERS OF THE GRID
     private void moveUp(ImageView[][] imageViews, int[][] textViewValues, int score) {
         for (int i = 1; i < textViewValues.length; i++) {
             for (int j = 0; j < textViewValues[i].length; j++) {
@@ -72,6 +73,7 @@ public class GameLogic {
         }
     }
 
+    //METHODS TO ADD
     public int up(ImageView[][] imageViews, int[][] textViewValues, int score) {
         this.movementSuccessful = false;
         moveUp(imageViews, textViewValues, score);
@@ -145,6 +147,12 @@ public class GameLogic {
         return score;
     }
 
+    /**
+     * Method to check if the game is finished, checking if there are any free space
+     * and after this checks y some of them can be added
+     * @param values
+     * @return
+     */
     public boolean finished(int[][] values) {
         boolean finished = true;
         for (int i = 0; i < values.length ; i++) {
@@ -173,6 +181,11 @@ public class GameLogic {
         return finished;
     }
 
+    /**
+     * Method to set a drawable to the imageviews depending of the values to the array of int
+     * @param imageViews
+     * @param imageViewsValues
+     */
     public void setImage(ImageView[][] imageViews, int[][] imageViewsValues) {
 
         for (int i = 0; i < imageViews.length; i++) {
